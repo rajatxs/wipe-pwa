@@ -1,4 +1,6 @@
 :root {
+   --scale-x: 100%;
+
    --color: #00FFB2;
    --color-f: #000;
 
@@ -53,6 +55,9 @@
 }
 
 body {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    background-color: var(--surface);
    color: var(--surface-f);
    font-family: var(--secondary-font);
