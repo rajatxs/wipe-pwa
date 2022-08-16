@@ -49,6 +49,8 @@ export default defineComponent({
 .app-setting-context {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     padding: 8px;
     border-bottom: 1px solid var(--accents-2);
 }
