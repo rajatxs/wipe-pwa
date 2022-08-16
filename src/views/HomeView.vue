@@ -1,0 +1,80 @@
+<script>
+import { RouterLink } from 'vue-router';
+import NullResultView from '../components/NullResultView.vue';
+
+export default {
+    data() {
+        return {
+            subscriptions: [{}],
+            loaded: true
+        }
+    },
+    components: { 
+        RouterLink,
+        NullResultView,
+    }
+}
+</script>
+
+<template>
+    <div v-if="loaded && subscriptions.length > 0" class="app-subs-list-view">
+        <RouterLink class="subs-item" to="/subs">
+            <div class="subs-icon">
+                <img src="https://avatars.dicebear.com/api/initials/:app.svg?backgroundColorLevel=300&chars=1" class="subs-icon-image" alt="" />
+            </div>
+            <div class="subs-details">
+                <div class="subs-alias">Me</div>
+                <div class="subs-status">Last seed 34m ago</div>
+            </div>
+        </RouterLink>
+    </div>
+    <div v-else-if="!loaded">
+        <div>Loading...</div>
+    </div>
+    <div v-else>
+        <NullResultView 
+            height="370px"
+            img="/img/no-data.svg"
+            title="No subscriptions"
+            desc="Tap on + icon to add one" />
+    </div>
+</template>
+
+<style>
+.app-subs-list-view {
+    padding-top: 8px;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+.subs-item {
+    display: flex;
+    height: 58px;
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: inherit;
+}
+.subs-icon {
+    width: 46px;
+    height: 46px;
+}
+.subs-icon-image {
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+}
+.subs-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3.6px;
+}
+.subs-alias {
+    font-size: 16px;
+}
+.subs-status {
+    font-size: 12px;
+}
+</style>
