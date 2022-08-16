@@ -7,6 +7,7 @@ import IconButton from './components/IconButton.vue';
 import Switch from './components/Switch.vue';
 
 import './assets/main.css';
+import './assets/custom.css';
 
 const app = createApp(App);
 app.component('app-button', Button);

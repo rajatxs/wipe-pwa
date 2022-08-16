@@ -1,0 +1,10 @@
+
+#app {
+   width: var(--scale-x);
+}
+
+@media screen and (min-width: 680px) {
+   :root {
+      --scale-x: 60%;
+   }
+}
