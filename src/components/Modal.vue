@@ -65,6 +65,8 @@ export default defineComponent({
 
 <style>
 .app-modal-outlayer {
+   display: flex;
+   justify-content: center;
    position: fixed;
    top: 0;
    left: 0;
@@ -76,8 +78,10 @@ export default defineComponent({
 .app-modal {
    position: absolute;
    bottom: 12px;
-   left: 12px;
-   right: 12px;
+   left: auto;
+   right: auto;
+   width: 100%;
+   max-width: 430px;
    padding: 12px 1rem;
    border-radius: 12px;
    height: auto;
@@ -98,8 +102,16 @@ export default defineComponent({
 }
 .app-modal-footer {
    display: flex;
-   gap: 8px;
+   gap: 15px;
    padding-top: 8px;
    padding-bottom: 8px;
+}
+@media screen and (min-width: 680px) {
+   .app-modal-outlayer {
+      align-items: center;
+   }
+   .app-modal {
+      position: static;
+   }
 }
 </style>
