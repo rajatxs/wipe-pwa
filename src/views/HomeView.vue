@@ -51,11 +51,16 @@ export default {
 }
 .subs-item {
     display: flex;
-    height: 58px;
-    gap: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
+    align-items: center;
+    height: 68px;
+    gap: 18px;
+    padding: 8px 1.5rem;
+    border-radius: 12px;
     color: inherit;
+    border: 1px solid var(--accents-1);
+}
+.subs-item:hover {
+    background-color: var(--accents-1);
 }
 .subs-icon {
     width: 46px;
