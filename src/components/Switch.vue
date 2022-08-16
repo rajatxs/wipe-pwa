@@ -33,7 +33,7 @@ export default {
 .app-switch {
   position: relative;
   display: inline-block;
-  width: 66px;
+  width: 50px;
   height: 28px;
 }
 
@@ -48,7 +48,7 @@ export default {
   cursor: pointer;
   top: 0;
   left: 0;
-  right: 0;
+  right: -4px;
   bottom: 0;
   background-color: var(--accents-2);
   -webkit-transition: 230ms;
