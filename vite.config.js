@@ -33,8 +33,6 @@ export default defineConfig({
             orientation: 'portrait-primary',
             display: 'standalone',
             start_url: '/',
-            background_color: '#FFFFFF',
-            theme_color: '#00FFB2',
             icons: [
                {
                   src: '/android-icon-36x36.png',
