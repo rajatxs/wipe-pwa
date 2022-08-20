@@ -4,6 +4,10 @@ import { defineComponent } from 'vue';
 export default defineComponent({
    name: 'app-button',
    props: {
+      disabled: {
+         type: Boolean,
+         default: false,
+      },
       block: {
          type: Boolean,
          default: false,
@@ -26,7 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-   <button :class="buttonClasses">
+   <button :class="buttonClasses" :disabled="disabled">
       <slot></slot>
    </button>
 </template>
@@ -41,7 +45,7 @@ export default defineComponent({
    justify-content: center;
    align-items: center;
    height: 38px;
-   border-radius: 25px;
+   border-radius: 10px;
    border: none;
    cursor: pointer;
    transition: background-color 120ms linear;
@@ -65,5 +69,10 @@ export default defineComponent({
 .app-button.fill__primary {
    background-color: var(--color);
    color: var(--color-f);
+}
+.app-button[disabled] {
+   background-color: var(--accents-2);
+   color: var(--accents-4);
+   pointer-events: none;
 }
 </style>

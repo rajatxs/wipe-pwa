@@ -30,7 +30,7 @@ export default defineComponent({
 .app-icon-button {
    position: relative;
    border-radius: 50%;
-   background-color: var(--accents-0);
+   background-color: transparent;
    cursor: pointer;
    transition: background-color 120ms linear;
 }
