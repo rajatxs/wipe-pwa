@@ -27,7 +27,7 @@ import { RouterLink } from 'vue-router';
    padding: 6px;
    gap: 4px;
    border-radius: 25px;
-   background-color: var(--accents-0);
+   background-color: var(--accents-1);
 }
 .app-navigation-tab-item {
    display: inherit;
