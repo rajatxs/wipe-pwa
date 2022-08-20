@@ -1,10 +1,86 @@
 
 #app {
    width: var(--scale-x);
+   height: 100%;
+   background-color: transparent;
 }
 
 @media screen and (min-width: 680px) {
    :root {
       --scale-x: 60%;
    }
+}
+
+.input-container {
+   padding-top: 8px;
+   padding-bottom: 8px;
+}
+.input-controller {
+   margin: 0;
+   height: 24px;
+   padding: 8px 12px;
+   background-color: var(--accents-1);
+   color: var(--surface-f);
+   border: none;
+   border-radius: 8px;
+   outline: 0;
+   font-size: 1rem;
+}
+
+@keyframes anim-toast-create {
+   from {
+      transform: translateY(40px);
+      opacity: 0.2;
+   }
+   to {
+      transform: translateY(0);
+      opacity: 1;
+   }
+}
+
+#toast-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
+   position: fixed;
+   bottom: 8px;
+   height: 65px;
+   left: 18px;
+   right: 18px;
+   width: calc(100% - 18px - 18px);
+   z-index: 1000;
+   overflow: hidden;
+   pointer-events: none;
+}
+.app-toast {
+   display: flex;
+   align-items: center;
+   padding-left: 16px;
+   padding-right: 16px;
+   transform: translateY(0);
+   position: absolute;
+   width: calc(100% - 16px - 16px);
+   max-width: 360px;
+   border-radius: 10px;
+   height: 45px;
+   opacity: 1;
+   transition: opacity 180ms ease;
+   animation-name: anim-toast-create;
+   animation-duration: 380ms;
+}
+.app-toast.invisible {
+   opacity: 0;
+}
+.app-toast.toast__default {
+   background-color: var(--surface-f);
+   color: var(--surface)
+}
+.app-toast.toast__primary {
+   background-color: var(--color);
+   color: var(--color-f);
+}
+.app-toast.toast__error {
+   background-color: var(--error);
+   color: var(--error-f);
 }

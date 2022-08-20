@@ -7,8 +7,11 @@
    --scolor: #6C63FF;
    --scolor-f: #FFF;
 
-   --surface: rgb(247, 247, 247);
+   --surface: #FFFFFF;
    --surface-f: #333;
+
+   --error: #ee0000;
+   --error-f: #FFF;
 
    --outlayer: rgba(0, 0, 0, 0.2);
 
@@ -55,9 +58,12 @@
 }
 
 body {
+   padding: 0;
+   margin: 0;
    display: flex;
    flex-direction: column;
    align-items: center;
+   height: 100vh;
    background-color: var(--surface);
    color: var(--surface-f);
    font-family: var(--secondary-font);
