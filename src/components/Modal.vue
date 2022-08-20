@@ -78,10 +78,10 @@ export default defineComponent({
 .app-modal {
    position: absolute;
    bottom: 12px;
-   left: auto;
-   right: auto;
-   width: 100%;
-   max-width: 430px;
+   left: 12px;
+   right: 12px;
+   width: auto;
+   max-width: auto;
    padding: 12px 1rem;
    border-radius: 12px;
    height: auto;
@@ -102,6 +102,7 @@ export default defineComponent({
 }
 .app-modal-footer {
    display: flex;
+   justify-content: flex-end;
    gap: 15px;
    padding-top: 8px;
    padding-bottom: 8px;
@@ -111,6 +112,7 @@ export default defineComponent({
       align-items: center;
    }
    .app-modal {
+      width: 440px;
       position: static;
    }
 }
