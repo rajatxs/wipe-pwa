@@ -1,36 +1,49 @@
 <script>
 import { RouterLink } from 'vue-router';
+import { fetchAllSubscriptions } from '../services/subscription';
 import NullResultView from '../components/NullResultView.vue';
+import LoaderView from '../components/LoaderView.vue';
+import { createToast } from '../utils/toast';
 
 export default {
     data() {
         return {
-            subscriptions: [{}],
-            loaded: true
+            subscriptions: [],
+            loaded: false,
         }
     },
     components: { 
         RouterLink,
         NullResultView,
-    }
+        LoaderView,
+    },
+    async mounted() {
+        try {
+            this.subscriptions = await fetchAllSubscriptions();
+        } catch (error) {
+            createToast('error', "Couldn't get subscriptions");
+        }
+        this.loaded = true;
+    },
 }
 </script>
 
 <template>
     <div v-if="loaded && subscriptions.length > 0" class="app-subs-list-view">
-        <RouterLink class="subs-item" to="/subs">
+        <RouterLink v-for="sub in subscriptions" :key="sub.id" class="subs-item" to="/subs">
             <div class="subs-icon">
-                <img src="https://avatars.dicebear.com/api/initials/:app.svg?backgroundColorLevel=300&chars=1" class="subs-icon-image" alt="" />
+                <img 
+                    :src="'https://avatars.dicebear.com/api/initials/:' + sub.alias + 'app.svg?backgroundColorLevel=300&chars=1'" 
+                    class="subs-icon-image" 
+                    alt="" />
             </div>
             <div class="subs-details">
-                <div class="subs-alias">Me</div>
-                <div class="subs-status">Last seed 34m ago</div>
+                <div class="subs-alias">{{sub.alias}}</div>
+                <div class="subs-status">{{sub.phone}}</div>
             </div>
         </RouterLink>
     </div>
-    <div v-else-if="!loaded">
-        <div>Loading...</div>
-    </div>
+    <LoaderView v-else-if="!loaded" message="Getting subscriptions" />
     <div v-else>
         <NullResultView 
             height="370px"
@@ -52,12 +65,10 @@ export default {
 .subs-item {
     display: flex;
     align-items: center;
-    height: 68px;
+    height: 48px;
     gap: 18px;
     padding: 8px 1.5rem;
-    border-radius: 12px;
     color: inherit;
-    border: 1px solid var(--accents-1);
 }
 .subs-item:hover {
     background-color: var(--accents-1);
