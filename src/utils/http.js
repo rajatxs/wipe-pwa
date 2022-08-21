@@ -1,4 +1,4 @@
-import { getValue } from './store';
+import { appTag, appAuthToken, appRemoteURL } from '../config';
 
 /**
  * Makes HTTP Request
@@ -14,7 +14,7 @@ export async function $request(
    data = {}
 ) {
    // @ts-ignore
-   const url = new URL(pathname, import.meta.env.VITE_APP_REMOTE_URL);
+   const url = new URL(pathname, appRemoteURL());
    let resp,
       body,
       responseBody = {},
@@ -30,8 +30,8 @@ export async function $request(
       headers['Content-Length'] = body.length;
    }
 
-   headers['X-Tag'] = getValue('tag');
-   headers['X-Auth-Token'] = getValue('token');
+   headers['X-Tag'] = appTag();
+   headers['X-Auth-Token'] = appAuthToken();
 
    /** @type {RequestInit} */
    const options = {
@@ -51,7 +51,11 @@ export async function $request(
       responseBody = await resp.blob();
    }
 
-   return [resp.status, responseBody, resp.headers];
+   if (resp.status >= 400) {
+      throw responseBody;
+   }
+
+   return responseBody;
 }
 
 /**

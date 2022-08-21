@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import SettingsView from '../views/SettingsView.vue';
+import SettingsView from '../views/SettingsView/SettingsView.vue';
 import AddSubscriptionView from '../views/AddSubscription.vue';
+import WAManageView from '../views/WAManageView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
             name: 'AddSubscription',
             component: AddSubscriptionView,
         },
+        {
+            path: '/wa',
+            name: 'WAManager',
+            component: WAManageView,
+        }
     ],
 });
 
