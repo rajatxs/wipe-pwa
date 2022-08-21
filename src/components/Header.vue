@@ -48,6 +48,7 @@ export default defineComponent({
    width: calc(var(--scale-x) - 42px);
    padding: 10px 14px;
    justify-content: space-between;
+   align-items: center;
    transform: translate(-50%, -50%);
 }
 </style>
