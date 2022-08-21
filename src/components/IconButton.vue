@@ -33,6 +33,7 @@ export default defineComponent({
    background-color: transparent;
    cursor: pointer;
    transition: background-color 120ms linear;
+   -webkit-tap-highlight-color: transparent;
 }
 .app-icon-button:hover {
    background-color: var(--accents-2);
@@ -55,8 +56,8 @@ export default defineComponent({
 }
 
 .app-icon-button.size__medium {
-   width: 48px;
-   height: 48px;
+   width: 42px;
+   height: 42px;
 }
 .app-icon-button.size__medium svg {
    width: 20px;
