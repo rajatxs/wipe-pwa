@@ -16,6 +16,10 @@ export default defineComponent({
          type: String,
          default: 'default',
       },
+      loading: {
+         type: Boolean,
+         default: false,
+      }
    },
    computed: {
       buttonClasses() {
@@ -31,7 +35,8 @@ export default defineComponent({
 
 <template>
    <button :class="buttonClasses" :disabled="disabled">
-      <slot></slot>
+      <app-loader v-if="loading" color="fg" size="14px"></app-loader>
+      <slot v-else></slot>
    </button>
 </template>
 
@@ -58,9 +63,10 @@ export default defineComponent({
    min-width: auto;
 }
 .app-button.inline {
-   display: inline-block;
+   display: inline-flex;
    margin-right: 4px;
    margin-left: 4px;
+   justify-content: center;
 }
 .app-button.fill__default {
    background-color: var(--accents-2);

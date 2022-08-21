@@ -6,7 +6,7 @@ export default defineComponent({
    props: {
       color: {
          type: String,
-         default: "foreground",
+         default: "fg",
       },
       size: {
          type: String,
@@ -21,11 +21,10 @@ export default defineComponent({
          }
       },
       loaderClasses() {
-         const list = ["app-loader"];
-
-         list.push("use-" + this.color);
-
-         return list;
+         return [
+            "app-loader", 
+            "loader__" + this.color
+         ];
       },
    },
 });
@@ -83,6 +82,12 @@ export default defineComponent({
    background-color: var(--color);
    border-radius: 100%;
    animation: app-loader-dot-before 2s infinite ease-in-out both;
+}
+.app-loader.loader__primary .app-loader-dot:before {
+   background-color: var(--color);
+}
+.app-loader.loader__fg .app-loader-dot:before {
+   background-color: var(--surface-f);
 }
 .app-loader-dot:nth-child(1) {
    animation-delay: -1.1s;

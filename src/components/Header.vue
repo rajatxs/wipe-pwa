@@ -1,35 +1,30 @@
 <script>
 import { defineComponent } from 'vue';
-import AddOutlineIcon from '../assets/icons/add-outline.vue';
-import SearchOutlineIcon from '../assets/icons/search-outline.vue';
+import PlusCircleIcon from '../assets/icons/plus-circle.vue';
+import WhatsappIcon from '../assets/icons/whatsapp.vue';
 import NavigationTab from '../components/NavigationTab.vue';
 
 export default defineComponent({
    name: 'Header',
    components: {
-      AddOutlineIcon,
-      SearchOutlineIcon,
+      PlusCircleIcon,
+      WhatsappIcon,
       NavigationTab,
    },
-   methods: {
-      handleAddSubscription() {
-         this.$router.push('/add');
-      }
-   }
 });
 </script>
 
 <template>
    <header class="app-header">
       <div class="app-header-actions-group">
-         <app-icon-button>
-            <SearchOutlineIcon />
+         <app-icon-button @click="$router.push('/wa')">
+            <WhatsappIcon />
          </app-icon-button>
 
          <NavigationTab />
 
-         <app-icon-button @click="handleAddSubscription">
-            <AddOutlineIcon />
+         <app-icon-button @click="$router.push('/add')">
+            <PlusCircleIcon />
          </app-icon-button>
       </div>
    </header>

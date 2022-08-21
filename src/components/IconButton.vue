@@ -42,12 +42,7 @@ export default defineComponent({
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   stroke-linecap: round;
-   stroke-linejoin: round;
-   stroke-width: 32px;
-   stroke: currentColor;
-   fill: transparent;
-   color: var(--accents-5);
+   fill: var(--accents-5);
 }
 
 .app-icon-button.size__small {

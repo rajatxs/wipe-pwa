@@ -103,7 +103,7 @@ export default defineComponent({
 .app-modal-footer {
    display: flex;
    justify-content: flex-end;
-   gap: 15px;
+   gap: 4px;
    padding-top: 8px;
    padding-bottom: 8px;
 }

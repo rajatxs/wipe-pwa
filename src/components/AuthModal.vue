@@ -5,12 +5,21 @@ import { setValue } from '../utils/store';
 
 export default defineComponent({
    name: 'AuthModal',
+   components: { Modal },
+   props: {
+      value: {
+         type: String,
+         default: '',
+      }
+   },
    data() {
       return {
          token: '',
       }
    },
-   components: { Modal },
+   created() {
+      this.token = this.value;
+   },
    methods: {
       saveToken() {
          if (this.token.length < 1) {
@@ -31,6 +40,7 @@ export default defineComponent({
          v-model="token" />
 
       <template #footer>
+         <app-button @click="$emit('close')">Cancel</app-button>
          <app-button fill="primary" @click="saveToken">Done</app-button>
       </template>
    </Modal>
