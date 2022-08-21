@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from 'vue';
-import { addSubscription } from '../services/subscription';
+import { $post } from '../utils/http';
 import { createToast } from '../utils/toast';
 
 export default defineComponent({
@@ -15,20 +15,28 @@ export default defineComponent({
    },
    methods: {
       getPayload() {
-         const { alias, phone, event } = this;
-         return { alias, phone, event };
+         return {
+            alias: this.alias,
+            phone: this.phone,
+            event: this.event,
+         };
       },
-      async handleAddSubscriptionAction() {
+      async addSubscription() {
          const payload = this.getPayload();
+
+         if (!this.inProgress) {
+            this.inProgress = true;
+         }
+
          try {
-            await addSubscription(payload);
+            await $post('/subs', {}, payload);
             createToast('primary', "Subscription added");
             this.$router.push('/');
          } catch (error) {
-            console.error(error);
-            createToast('error', error.message);
+            createToast('error', error.message);            
          }
-      }
+         this.inProgress = false;
+      },
    }
 });
 </script>
@@ -54,8 +62,9 @@ export default defineComponent({
       <div>
          <app-button 
             fill="primary" 
-            :disabled="alias.length < 2 || phone.length < 10"
-            @click="handleAddSubscriptionAction">
+            :disabled="inProgress || alias.length < 2 || phone.length < 10"
+            :loading="inProgress"
+            @click="addSubscription">
             Add
          </app-button>
       </div>

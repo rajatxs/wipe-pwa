@@ -1,9 +1,9 @@
 <script>
 import { RouterLink } from 'vue-router';
-import { fetchAllSubscriptions } from '../services/subscription';
+import { $get } from '../utils/http';
+import { createToast } from '../utils/toast';
 import NullResultView from '../components/NullResultView.vue';
 import LoaderView from '../components/LoaderView.vue';
-import { createToast } from '../utils/toast';
 
 export default {
     data() {
@@ -18,13 +18,23 @@ export default {
         LoaderView,
     },
     async mounted() {
-        try {
-            this.subscriptions = await fetchAllSubscriptions();
-        } catch (error) {
-            createToast('error', "Couldn't get subscriptions");
-        }
-        this.loaded = true;
+        await this.fetchAllSubscriptions();
     },
+    methods: {
+        async fetchAllSubscriptions() {
+            if (this.loaded) {
+                this.loaded = false;
+            }
+
+            try {
+                const response = await $get('/subs');
+                this.subscriptions = response.result;
+            } catch (error) {
+                createToast('error', error.message);
+            }
+            this.loaded = true;
+        }
+    }
 }
 </script>
 
