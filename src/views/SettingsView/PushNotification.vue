@@ -30,12 +30,11 @@ export default defineComponent({
             // @ts-ignore
             const applicationServerKey = APP_APPLICATION_SERVER_KEY();
             const sw = await window.navigator.serviceWorker.ready;
-            console.log("APP SERVER KEY", applicationServerKey);
             let push = await sw.pushManager.subscribe({
                userVisibleOnly: true,
                applicationServerKey,
             });
-            console.log("PUSH", push);
+
             pushPayload.user_agent = window.navigator.userAgent;
             pushPayload.payload = JSON.stringify(push);
 
