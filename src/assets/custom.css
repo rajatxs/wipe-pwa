@@ -19,6 +19,7 @@
    margin: 0;
    height: 24px;
    padding: 8px 12px;
+   font-family: var(--font-face);
    background-color: var(--accents-1);
    color: var(--surface-f);
    border: none;
