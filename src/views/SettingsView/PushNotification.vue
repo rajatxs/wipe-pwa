@@ -48,6 +48,7 @@ export default defineComponent({
          } else {
             await this.deletePushPayload();
             removeValue(PUSH_SUBS_KEY);
+            createToast('primary', 'Push notification disabled');
          }
          this.enabled = value;
       },
