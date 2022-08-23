@@ -3,10 +3,14 @@ import { defineComponent } from 'vue';
 import { REMOTE_URL_KEY, appRemoteURL } from '../../config';
 import { setValue } from '../../utils/store.js';
 import Modal from '../../components/Modal.vue';
+import HddStackIcon from '../../assets/icons/hdd-stack.vue';
 
 export default defineComponent({
    name: 'RemoveURLContext',
-   components: { Modal },
+   components: { 
+      Modal, 
+      HddStackIcon,
+   },
    data() {
       return {
          url: '',
@@ -32,9 +36,12 @@ export default defineComponent({
       class="app-setting-context" 
       id="remote-url-setting" 
       @click="showPrompt = true">
-      <label class="label">
-         <h5>Remote URL</h5>
-         <small>{{url}}</small>
+      <label class="context-label">
+         <div class="icon"><hddStackIcon /></div>
+         <div>
+            <h5 class="context-title">Remote URL</h5>
+            <span class="context-desc">{{url}}</span>
+         </div>
       </label>
    </div>
    <Modal 

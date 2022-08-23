@@ -2,10 +2,14 @@
 import { defineComponent } from 'vue';
 import { appAuthToken } from '../../config';
 import AuthModal from '../../components/AuthModal.vue';
+import AsteriskIcon from '../../assets/icons/asterisk.vue';
 
 export default defineComponent({
    name: 'AuthToken',
-   components: { AuthModal },
+   components: { 
+      AuthModal,
+      AsteriskIcon,
+   },
    filters: {
       /**
        * Returns suffix portion from token
@@ -41,9 +45,12 @@ export default defineComponent({
       class="app-setting-context" 
       id="remote-url-setting" 
       @click="showPrompt = true">
-      <label class="label">
-         <h5>Authentication token</h5>
-         <small>{{ getTruncatedToken() }}</small>
+      <label class="context-label">
+         <div class="icon"><AsteriskIcon /></div>
+         <div>
+            <h5 class="context-title">Authentication token</h5>
+            <span class="context-desc">{{ getTruncatedToken() }}</span>
+         </div>
       </label>
    </div>
    <AuthModal 

@@ -22,10 +22,38 @@ import AuthTokenContext from './AuthToken.vue';
    align-items: center;
    justify-content: space-between;
    gap: 12px;
-   padding: 12px 18px;
+   padding-top: 12px;
+   padding-bottom: 12px;
+   padding-right: 16px;
    cursor: pointer;
+   border-radius: var(--x-stack-edge-radius);
+   -webkit-tap-highlight-color: transparent;
 }
 .app-setting-context:hover {
    background-color: var(--accents-1);
+}
+.app-setting-context .context-label {
+   display: flex;
+   flex-direction: row;
+}
+.app-setting-context .context-label .icon {
+   display: flex;
+   width: 70px;
+   justify-content: center;
+   align-items: center;
+}
+.app-setting-context .context-label .app-icon {
+   width: 22px;
+   height: 22px;
+   fill: var(--accents-6);
+}
+.context-title {
+   font-weight: 500;
+   line-height: 14px;
+   letter-spacing: inherit;
+}
+.context-desc {
+   font-size: 80%;
+   color: var(--accents-5);
 }
 </style>

@@ -4,11 +4,15 @@ import { $post, $delete } from '../../utils/http';
 import { createToast } from '../../utils/toast';
 import { getValue, hasValue, setValue, removeValue } from '../../utils/store';
 import { APP_APPLICATION_SERVER_KEY } from '../../config';
+import BellIcon from '../../assets/icons/bell.vue';
 
 const PUSH_SUBS_KEY = 'push-subs-id';
 
 export default defineComponent({
    name: 'PushNotificationContext',
+   components: {
+      BellIcon
+   },
    data() {
       return {
          enabled: false,
@@ -75,9 +79,12 @@ export default defineComponent({
 
 <template>
    <div class="app-setting-context" id="push-notification-setting">
-      <label for="push-notification-switch" class="label">
-         <h5>Push notifications</h5>
-         <small>Get push notifications when someone goes online or offline</small>
+      <label for="push-notification-switch" class="context-label">
+         <div class="icon"><BellIcon /></div>
+         <div>
+            <h5 class="context-title">Push notifications</h5>
+            <span class="context-desc">Get push notifications on different events</span>
+         </div>
       </label>
 
       <app-switch
