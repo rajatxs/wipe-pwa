@@ -8,6 +8,7 @@
 @media screen and (min-width: 680px) {
    :root {
       --scale-x: 60%;
+      --x-stack-edge-radius: 8px;
    }
 }
 

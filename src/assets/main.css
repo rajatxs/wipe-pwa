@@ -25,6 +25,8 @@
    --accents-7: #333;
    --accents-8: #111;
 
+   --x-stack-edge-radius: 0px;
+
    --primary-font: "Poppins", Inter, Arial;
    --secondary-font: "Inter", Arial;
 }
