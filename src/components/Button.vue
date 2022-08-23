@@ -53,6 +53,7 @@ export default defineComponent({
    border-radius: 10px;
    border: none;
    cursor: pointer;
+   -webkit-tap-highlight-color: transparent;
    transition: background-color 120ms linear;
 }
 .app-button.block {
