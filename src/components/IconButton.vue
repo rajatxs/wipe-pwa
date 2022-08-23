@@ -35,7 +35,7 @@ export default defineComponent({
    transition: background-color 120ms linear;
    -webkit-tap-highlight-color: transparent;
 }
-.app-icon-button:hover {
+.app-icon-button:active {
    background-color: var(--accents-2);
 }
 .app-icon-button svg {
