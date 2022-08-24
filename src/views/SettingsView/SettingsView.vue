@@ -38,18 +38,20 @@ import AuthTokenContext from './AuthToken.vue';
 }
 .app-setting-context .context-label .icon {
    display: flex;
-   width: 70px;
+   width: 60px;
+   padding-top: 2px;
    justify-content: center;
-   align-items: center;
+   align-items: flex-start;
 }
 .app-setting-context .context-label .app-icon {
-   width: 22px;
-   height: 22px;
+   width: 18px;
+   height: 18px;
    fill: var(--accents-6);
 }
 .context-title {
    font-weight: 500;
-   line-height: 14px;
+   font-size: 16px;
+   line-height: 12px;
    letter-spacing: inherit;
 }
 .context-desc {
