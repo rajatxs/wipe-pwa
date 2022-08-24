@@ -44,14 +44,12 @@ export default defineComponent({
       <template #footer>
          <app-button 
             @click="close" 
-            block 
             fill="default">
             Close
          </app-button>
          <app-button 
             v-if="needRefresh" 
             @click="update()" 
-            block 
             fill="primary">
             Reload
          </app-button>
