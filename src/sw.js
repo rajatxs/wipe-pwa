@@ -1,4 +1,5 @@
 import { precacheAndRoute } from 'workbox-precaching';
+import { pushHandler } from './worker/handler';
 
 self.addEventListener('message', (event) => {
    if (event.data && event.data.type === 'SKIP_WAITING') {
@@ -7,17 +8,7 @@ self.addEventListener('message', (event) => {
    }
 });
 
-self.addEventListener('push', (event) => {
-   const title = 'Presence Update';
-   const body = event.data.text();
-   const options = { body };
-
-   try {
-      registration.showNotification(title, options);
-   } catch (error) {
-      console.error("SW Couldn't show notification", error);
-   }
-});
+self.addEventListener('push', pushHandler);
 
 // @ts-ignore
 precacheAndRoute(self.__WB_MANIFEST);
