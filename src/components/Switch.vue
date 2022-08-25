@@ -39,6 +39,7 @@ export default {
   height: 0;
   width: 0;
   visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 .app-switch input[type=checkbox]:checked + label {
   background: var(--color);
