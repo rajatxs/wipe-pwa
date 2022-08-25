@@ -4,6 +4,7 @@ import { $get, $put } from '../utils/http';
 import { createToast } from '../utils/toast';
 import NullResultView from '../components/NullResultView.vue';
 import LoaderView from '../components/LoaderView.vue';
+import SubscriptionStatus from './HomeView/SubscriptionStatus.vue';
 
 export default {
     data() {
@@ -16,6 +17,7 @@ export default {
         RouterLink,
         NullResultView,
         LoaderView,
+        SubscriptionStatus,
     },
     async mounted() {
         await this.fetchAllSubscriptions();
@@ -68,7 +70,9 @@ export default {
                 </div>
                 <div class="subs-details">
                     <div class="subs-alias">{{sub.alias}}</div>
-                    <div class="subs-status">{{sub.phone}}</div>
+                    <SubscriptionStatus 
+                        :subs-id="sub.id" 
+                        :fallback="sub.phone" />
                 </div>
             </RouterLink>
             <div class="subs-action">
@@ -140,9 +144,7 @@ export default {
 .subs-alias {
     font-size: 16px;
     font-weight: 500;
+    line-height: 1.2rem;
 }
-.subs-status {
-    font-size: 12px;
-    color: var(--accents-5);
-}
+
 </style>
