@@ -100,6 +100,7 @@ export default {
 }
 .subs-item {
     display: flex;
+    width: inherit;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -107,10 +108,10 @@ export default {
 .subs-router-link {
     display: flex;
     align-items: center;
-    width: 80%;
     height: 48px;
     gap: 18px;
     padding: 8px 1.5rem;
+    width: calc(80% - 3rem);
     color: inherit;
     border-radius: var(--x-stack-edge-radius);
 }
@@ -119,6 +120,7 @@ export default {
 }
 .subs-action {
     width: 20%;
+    padding-right: 16px;
     height: 48px;
 }
 .subs-icon {
