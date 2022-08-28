@@ -25,6 +25,7 @@ export default defineComponent({
       buttonClasses() {
          return [
             'app-button',
+            this.loading && "loading",
             'fill__' + this.fill,
             this.block? 'block': 'inline',
          ];
@@ -50,11 +51,15 @@ export default defineComponent({
    justify-content: center;
    align-items: center;
    height: 38px;
-   border-radius: 10px;
+   border-radius: 8px;
    border: none;
    cursor: pointer;
    -webkit-tap-highlight-color: transparent;
    transition: background-color 120ms linear;
+}
+.app-button.loading .app-loader {
+   margin-left: auto;
+   margin-right: auto;
 }
 .app-button.block {
    display: block;
@@ -76,6 +81,10 @@ export default defineComponent({
 .app-button.fill__primary {
    background-color: var(--color);
    color: var(--color-f);
+}
+.app-button.fill__error {
+   background-color: var(--error);
+   color: var(--error-f);
 }
 .app-button[disabled] {
    background-color: var(--accents-2);
