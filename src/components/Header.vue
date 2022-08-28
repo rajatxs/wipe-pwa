@@ -1,17 +1,7 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
 import PlusCircleIcon from '../assets/icons/plus-circle.vue';
 import WhatsappIcon from '../assets/icons/whatsapp.vue';
 import NavigationTab from '../components/NavigationTab.vue';
-
-export default defineComponent({
-   name: 'Header',
-   components: {
-      PlusCircleIcon,
-      WhatsappIcon,
-      NavigationTab,
-   },
-});
 </script>
 
 <template>
@@ -39,6 +29,7 @@ export default defineComponent({
    width: 100%;
    height: 64px;
    border-bottom: 1px solid var(--accents-2);
+   background-color: var(--surface);
 }
 .app-header-actions-group {
    position: absolute;
