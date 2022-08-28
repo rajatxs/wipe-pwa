@@ -66,13 +66,13 @@ async function restoreSession() {
    gap: 12px;
    background-color: transparent;
    border: none;
-   color: var(--accents-6);
+   color: var(--accents-5);
    cursor: pointer;
 }
 .session-op .app-icon {
    width: 48px;
    height: 48px;
-   fill: var(--accents-6);
+   fill: var(--accents-5);
    transition: width 160ms ease, height 160ms ease;
 }
 .session-op:hover {
