@@ -1,0 +1,9 @@
+{
+   "compilerOptions": {
+      "checkJs": false,
+      "strict": false,
+      "alwaysStrict": false,
+      "jsx": "preserve",
+      "allowJs": true
+   }
+}
