@@ -1,4 +1,13 @@
 /**
+ * Returns absolute url of avatar
+ * @param {string} seed
+ * @param {'svg'|'png'} format
+ */
+export function avatarUrl(seed, format = 'svg') {
+   return `https://avatars.dicebear.com/api/initials/${seed}.${format}?backgroundColorLevel=300&chars=1`;
+}
+
+/**
  * Returns new tag
  * @returns {string}
  */
