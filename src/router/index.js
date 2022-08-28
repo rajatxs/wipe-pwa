@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeView from '../views/HomeView/HomeView.vue';
 import SettingsView from '../views/SettingsView/SettingsView.vue';
 import AddSubscriptionView from '../views/AddSubscription.vue';
-import WAManageView from '../views/WAManageView.vue';
+import WAManageView from '../views/WAManageView/WAManageView.vue';
 import SubscriptionView from '../views/SubscriptionView/SubscriptionView.vue';
 
 const router = createRouter({
