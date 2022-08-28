@@ -1,86 +1,83 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 import { $post, $delete } from '../../utils/http';
 import { createToast } from '../../utils/toast';
 import { getValue, hasValue, setValue, removeValue } from '../../utils/store';
 import { APP_APPLICATION_SERVER_KEY } from '../../config';
 import BellIcon from '../../assets/icons/bell.vue';
 
-const PUSH_SUBS_KEY = 'push-subs-id';
+const PUSH_SUBS_ID = 'push-subs-id';
+const enabled = ref(false);
 
-export default defineComponent({
-   name: 'PushNotificationContext',
-   components: {
-      BellIcon
-   },
-   data() {
-      return {
-         enabled: false,
-      };
-   },
-   created() {
-      this.enabled = hasValue(PUSH_SUBS_KEY);
-   },
-   methods: {
-   
-      /**
-       * Handles push notification setting
-       * @param {boolean} value 
-       */
-      async handlePushNotificationSetting(value) {
-         if (value) {
-            const pushPayload = {};
+/**
+ * Uploads push subscription payload
+ * @param {object} payload
+ * @returns {Promise<object>}
+ */
+function uploadPushPayload(payload) {
+   return $post('/push-subs', {}, payload);
+}
 
-            // @ts-ignore
-            const applicationServerKey = APP_APPLICATION_SERVER_KEY();
-            const sw = await window.navigator.serviceWorker.ready;
-            let push = await sw.pushManager.subscribe({
-               userVisibleOnly: true,
-               applicationServerKey,
-            });
+/**
+ * Deletes push subscription payload
+ * @returns {Promise<object>}
+ */
+function deletePushPayload() {
+   return $delete('/push-subs/' + getValue(PUSH_SUBS_ID));
+}
 
-            pushPayload.user_agent = window.navigator.userAgent;
-            pushPayload.payload = JSON.stringify(push);
+/**
+ * Handles push notification setting
+ * @param {boolean} value
+ */
+async function handlePushNotificationSetting(value) {
+   if (value) {
+      const pushPayload = {};
 
-            try {
-               const response = await this.uploadPushPayload(pushPayload);
-               setValue(PUSH_SUBS_KEY, response.result.insertId);
-               createToast('primary', 'Push notification enabled');
-            } catch (error) {
-               createToast('error', error.message);
-            }
-         } else {
-            await this.deletePushPayload();
-            removeValue(PUSH_SUBS_KEY);
-            createToast('primary', 'Push notification disabled');
-         }
-         this.enabled = value;
-      },
+      // @ts-ignore
+      const applicationServerKey = APP_APPLICATION_SERVER_KEY();
+      const sw = await window.navigator.serviceWorker.ready;
+      let push = await sw.pushManager.subscribe({
+         userVisibleOnly: true,
+         applicationServerKey,
+      });
 
-      /**
-       * Uploads push subscription payload
-       * @param {object} payload
-       * @returns {Promise<object>}
-       */
-      uploadPushPayload(payload) {
-         return $post('/push-subs', {}, payload);
-      },
+      pushPayload.user_agent = window.navigator.userAgent;
+      pushPayload.payload = JSON.stringify(push);
 
-      /**
-       * Deletes push subscription payload
-       * @returns {Promise<object>}
-       */
-      deletePushPayload() {
-         return $delete('/push-subs/' + getValue(PUSH_SUBS_KEY));
+      try {
+         const response = await uploadPushPayload(pushPayload);
+         setValue(PUSH_SUBS_ID, response.result.insertId);
+         createToast('primary', 'Push notification enabled');
+      } catch (error) {
+         createToast('error', error.message);
       }
-   },
+   } else {
+      try {
+         const sw = await window.navigator.serviceWorker.ready;
+         const subs = await sw.pushManager.getSubscription();
+         await subs.unsubscribe();
+         await deletePushPayload();
+         removeValue(PUSH_SUBS_ID);
+         createToast('primary', 'Push notification disabled');
+      } catch (error) {
+         createToast('error', "Couldn't turn off notification");
+      }
+   }
+   enabled.value = value;
+}
+
+onMounted(function () {
+   enabled.value = hasValue(PUSH_SUBS_ID);
 });
 </script>
 
 <template>
    <div class="app-setting-context" id="push-notification-setting">
       <label for="push-notification-switch" class="context-label">
-         <div class="icon"><BellIcon /></div>
+         <div class="icon">
+            <BellIcon />
+         </div>
          <div>
             <h5 class="context-title">Push notifications</h5>
             <span class="context-desc">Get push notifications on different events</span>
@@ -90,7 +87,6 @@ export default defineComponent({
       <app-switch
          id="push-notification-switch"
          :value="enabled"
-         @value="handlePushNotificationSetting"
-      />
+         @value="handlePushNotificationSetting" />
    </div>
 </template>
