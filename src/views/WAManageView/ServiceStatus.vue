@@ -2,16 +2,30 @@
 import { defineProps, computed } from 'vue';
 
 const props = defineProps({
+   loading: Boolean,
    status: Boolean,
 });
 
-const label = computed(function() {
-   return props.status? 'Running': 'Closed';
+const label = computed(function () {
+   return props.status ? 'Running' : 'Closed';
+});
+const classes = computed(function () {
+   const list = ['app-service-status'];
+
+   if (props.loading) {
+      list.push('status__loading');
+   } else {
+      list.push(props.status ? 'status__on' : 'status__off');
+   }
+
+   return list;
 });
 </script>
 
 <template>
-   <div class="app-service-status" :data-status-on="status"><strong>{{label}}</strong></div>
+   <div :class="classes">
+      <strong>{{ loading ? '...' : label }}</strong>
+   </div>
 </template>
 
 <style>
@@ -25,10 +39,7 @@ const label = computed(function() {
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 8rem;
-   margin-bottom: 5rem;
+   margin: 8rem auto;
    width: 120px;
    height: 120px;
    border-radius: 50%;
@@ -48,14 +59,17 @@ const label = computed(function() {
 .app-service-status:after {
    animation-delay: -1s;
 }
-.app-service-status[data-status-on='true'] {
-   background: var(--color);
+.app-service-status.status__loading {
+   background-color: var(--scolor);
+}
+.app-service-status.status__on {
+   background-color: var(--color);
    box-shadow: 0 0 0 0 var(--color);
    color: var(--color-f);
    animation: pulse-anim 1.5s infinite linear;
 }
-.app-service-status[data-status-on='false'] {
-   background: var(--accents-7);
+.app-service-status.status__off {
+   background-color: var(--accents-7);
    box-shadow: 0 0 0 0 var(--accents-7);
    color: var(--accents-0);
 }

@@ -8,6 +8,7 @@ import { createToast } from '../../utils/toast';
 
 const status = ref(false);
 const timer = ref(null);
+const loading = ref(false);
 
 async function fetchServiceStatus() {
    try {
@@ -33,18 +34,20 @@ function unregisterStatusInterval() {
    }
 }
 
-onMounted(function() {
-   fetchServiceStatus();
+onMounted(async function () {
+   loading.value = true;
+   await fetchServiceStatus();
+   loading.value = false;
    registerStatusInterval();
 });
 
-onUnmounted(function() {
+onUnmounted(function () {
    unregisterStatusInterval();
 });
 </script>
 
 <template>
-   <ServiceStatus :status="status" />
+   <ServiceStatus :status="status" :loading="loading" />
    <SessionOperation />
    <ServiceAction :status="status" />
 </template>
