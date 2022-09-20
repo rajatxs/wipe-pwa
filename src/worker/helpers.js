@@ -8,14 +8,16 @@ export function showPushNotification(msgPayload) {
    const badge = '/badge-128x128.png';
    let title,
       body,
+      tag,
       timestamp = Date.now();
    const [type, ...args] = msgPayload;
 
    switch (type) {
       case PRESENCE_MSG_KEY: {
-         const [alias, status, ts] = args;
+         const [alias = 'User', status, ts] = args;
          title = 'Presence update';
          body = `${alias} is ${status ? 'online' : 'offline'}`;
+         tag = `presence:${alias.replace(/\s/g, '')}`;
          timestamp = ts;
          break;
       }
@@ -24,7 +26,9 @@ export function showPushNotification(msgPayload) {
 
          switch (serviceType) {
             case SOCKET_MSG_KEY: {
-               title = `Socket is ${status ? 'opened' : 'closed'}`;
+               title = "Socket connection";
+               body = `Socket is ${status ? 'opened' : 'closed'}`;
+               tag = 'event:socket';
                break;
             }
          }
@@ -34,7 +38,12 @@ export function showPushNotification(msgPayload) {
 
    try {
       // @ts-ignore
-      registration.showNotification(title, { body, badge, timestamp });
+      registration.showNotification(title, { 
+         body, 
+         badge, 
+         tag,
+         timestamp,
+      });
    } catch (error) {
       console.error("Couldn't show notification", error);
    }
