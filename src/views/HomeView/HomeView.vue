@@ -7,6 +7,12 @@ import NullResultView from '../../components/NullResultView.vue';
 import LoaderView from '../../components/LoaderView.vue';
 import SubscriptionStatus from './SubscriptionStatus.vue';
 import { avatarUrl } from '../../utils/common';
+import { 
+   SUBSCRIPTION_STORAGE_KEY, 
+   getPayload, 
+   hasPayload,
+   savePayload 
+} from '../../utils/storage';
 
 const subscriptions = ref([]);
 const loaded = ref(false);
@@ -36,22 +42,35 @@ async function updateEnabledStatus(enabled, id) {
    }
 }
 
-async function fetchAllSubscriptions() {
+async function loadAllSubscriptions() {
    if (loaded.value) {
       loaded.value = false;
    }
 
-   try {
-      const response = await $get('/subs');
-      subscriptions.value = Array.from(response.result);
-   } catch (error) {
-      createToast('error', error.message);
+   if (hasPayload(SUBSCRIPTION_STORAGE_KEY)) {
+      subscriptions.value = getPayload(SUBSCRIPTION_STORAGE_KEY);
+   } else {
+      try {
+         let result;
+         const response = await $get('/subs');
+
+         result = Array.from(response.result);
+   
+         if (result.length) {
+            savePayload(SUBSCRIPTION_STORAGE_KEY, result);
+         }
+   
+         subscriptions.value = result;
+      } catch (error) {
+         createToast('error', error.message);
+      }
    }
+
    loaded.value = true;
 }
 
 onMounted(function () {
-   fetchAllSubscriptions();
+   loadAllSubscriptions();
 });
 </script>
 
