@@ -17,6 +17,14 @@ export function getPayload(key) {
 }
 
 /**
+ * Checks given key exists or not
+ * @param {string} key 
+ */
+export function hasPayload(key) {
+   return localStorage.hasOwnProperty(key);
+}
+
+/**
  * Writes given `payload` to local storage
  * @param {string} key 
  * @param {object|Array<any>} payload 
