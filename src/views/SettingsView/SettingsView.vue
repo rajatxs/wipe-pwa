@@ -2,6 +2,7 @@
 import PushNotificationContext from './PushNotification.vue';
 import RemoveURLContext from './RemoteURL.vue';
 import AuthTokenContext from './AuthToken.vue';
+import ClearDataContext from './ClearData.vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import AuthTokenContext from './AuthToken.vue';
       <RemoveURLContext />
       <AuthTokenContext />
       <PushNotificationContext />
+      <ClearDataContext />
    </div>
 </template>
 
