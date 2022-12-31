@@ -3,16 +3,20 @@ import { ref, watch, defineProps, defineEmits } from 'vue';
 import BottomActionSheet from '../../components/BottomActionSheet.vue';
 import TrashIcon from '../../assets/icons/trash3.vue';
 import Modal from '../../components/Modal.vue';
-import { $delete } from '../../utils/http';
+import { $delete, $put } from '../../utils/http';
 import { createToast } from '../../utils/toast';
+import BellIcon from '../../assets/icons/bell.vue';
+import BellSlashIcon from '../../assets/icons/bell-slash.vue';
+import { SUBSCRIPTION_STORAGE_KEY, removePayload } from '../../utils/storage';
 
-const emit = defineEmits(['delete']);
+const emit = defineEmits(['update', 'delete']);
 const props = defineProps({
-   subsId: Number,
+   subsInfo: Object,
 });
 const showDeleteConfirmationPrompt = ref(false);
 const deleteConfirmed = ref(false);
 const deleting = ref(false);
+
 watch(deleteConfirmed, async function (value) {
    if (value) {
       deleting.value = true;
@@ -27,11 +31,41 @@ watch(deleteConfirmed, async function (value) {
 
 async function deleteSubscription() {
    try {
-      const response = await $delete('/subs/' + props.subsId);
+      const response = await $delete('/subs/' + props.subsInfo.id);
       createToast('default', response.message);
-      emit('delete', props.subsId, response);
+      emit('delete', props.subsInfo.id, response);
    } catch (error) {
       createToast('error', error.message);
+   }
+}
+
+async function changeNotificationSetting() {
+   /** @type {Number} */
+   let notify;
+
+   /** @type {'default'|'primary'} */
+   let toastType;
+
+   /** @type {'on'|'off'} */
+   let label;
+
+   if (props.subsInfo.notify === 1) {
+      notify = 0;
+      toastType = 'default';
+      label = 'off';
+   } else {
+      notify = 1;
+      toastType = 'primary';
+      label = 'on';
+   }
+
+   try {
+      await $put('/subs/' + props.subsInfo.id, {}, { notify });
+      createToast(toastType, `Notification is turned ${label} for ${props.subsInfo.alias}`);
+      removePayload(SUBSCRIPTION_STORAGE_KEY);
+      emit('update', props.subsInfo.id);
+   } catch (error) {
+      createToast('error', "Couldn't change notification setting");
    }
 }
 </script>
@@ -39,8 +73,16 @@ async function deleteSubscription() {
 <template>
    <BottomActionSheet>
       <div class="subs-actions">
-         <app-icon-button @click="showDeleteConfirmationPrompt = true">
+         <app-icon-button 
+            title="Delete subscription"
+            @click="showDeleteConfirmationPrompt = true">
             <TrashIcon />
+         </app-icon-button>
+         <app-icon-button 
+            title="Turn on/off notification"
+            @click="changeNotificationSetting">
+            <BellSlashIcon v-if="subsInfo.notify" />
+            <BellIcon v-else />
          </app-icon-button>
       </div>
    </BottomActionSheet>
@@ -60,3 +102,10 @@ async function deleteSubscription() {
       </template>
    </Modal>
 </template>
+
+<style>
+.subs-actions {
+   display: flex;
+   justify-content: space-evenly;
+}
+</style>

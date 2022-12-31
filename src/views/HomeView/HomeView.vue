@@ -6,6 +6,7 @@ import { createToast } from '../../utils/toast';
 import NullResultView from '../../components/NullResultView.vue';
 import LoaderView from '../../components/LoaderView.vue';
 import SubscriptionStatus from './SubscriptionStatus.vue';
+import BellSlashIcon from '../../assets/icons/bell-slash.vue';
 import { avatarUrl } from '../../utils/common';
 import { 
    SUBSCRIPTION_STORAGE_KEY, 
@@ -87,6 +88,9 @@ onMounted(function () {
                   height="46"
                   class="subs-icon-image"
                />
+               <BellSlashIcon 
+                  v-if="!sub.notify" 
+                  class="subs-mute-badge" />
             </div>
             <div class="subs-details">
                <div class="subs-alias">{{ sub.alias }}</div>
@@ -159,6 +163,19 @@ onMounted(function () {
 .subs-icon {
    width: 46px;
    height: 46px;
+   position: relative;
+}
+
+.subs-mute-badge {
+   position: absolute;
+   width: 13px;
+   height: 13px;
+   top: -3px;
+   right: -3px;
+   padding: 5px;
+   background-color: var(--accents-2);
+   fill: var(--accents-6);
+   border-radius: 25px;
 }
 
 .subs-icon-image {
