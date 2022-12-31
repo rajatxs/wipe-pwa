@@ -1,13 +1,29 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { $get } from '../../utils/http';
+import { createToast } from '../../utils/toast';
 import PresenceHistory from './PresenceHistory.vue';
 import SubscriptionActions from './SubscriptionActions.vue';
 
 const route = useRoute();
+const subs = ref(null);
 const router = useRouter();
 const subid = ref(Number(route.params.id));
 const limit = ref(16);
+
+async function fetchSubscriptionInfo() {
+   try {
+      const resp = await $get('/subs/' + subid.value);
+      subs.value = resp.result;
+   } catch (error) {
+      createToast('error', "Couldn't get subscription info");
+   }
+}
+
+onMounted(async () => {
+   await fetchSubscriptionInfo();
+})
 </script>
 
 <template>
@@ -18,9 +34,11 @@ const limit = ref(16);
       <div class="history-loader">
          <app-button @click="limit += 16">...</app-button>
       </div>
-      <SubscriptionActions 
-         :subs-id="subid"
-         @delete="router.push('/')" />
+      <SubscriptionActions
+         v-if="subs" 
+         :subs-info="subs"
+         @delete="router.push('/')"
+         @update="fetchSubscriptionInfo" />
    </div>
 </template>
 
@@ -45,10 +63,6 @@ const limit = ref(16);
    font-weight: 300;
    font-size: 14px;
    color: var(--accents-6);
-}
-.subs-actions {
-   display: flex;
-   justify-content: center;
 }
 .history-loader {
    display: flex;
