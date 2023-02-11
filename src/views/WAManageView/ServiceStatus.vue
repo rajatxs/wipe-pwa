@@ -36,7 +36,7 @@ const classes = computed(function () {
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   margin: 8rem auto 3rem auto;
+   margin: 8rem auto 4rem auto;
    width: 120px;
    height: 120px;
    border-radius: 50%;
