@@ -48,6 +48,13 @@ onUnmounted(function () {
 
 <template>
    <ServiceStatus :status="status" :loading="loading" />
+   <hr class="status-divider" />
    <SessionOperation />
    <ServiceAction :status="status" />
 </template>
+
+<style>
+.status-divider {
+   border-top: 1px solid var(--accents-2);
+}
+</style>
