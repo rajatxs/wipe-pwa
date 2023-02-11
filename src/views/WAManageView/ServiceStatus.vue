@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, computed } from 'vue';
+import HDDIcon from '../../assets/icons/hdd-fill.vue';
 
 const props = defineProps({
    loading: Boolean,
@@ -24,53 +25,30 @@ const classes = computed(function () {
 
 <template>
    <div :class="classes">
+      <HDDIcon />
       <strong>{{ loading ? '...' : label }}</strong>
    </div>
 </template>
 
 <style>
-@keyframes pulse-anim {
-   100% {
-      box-shadow: 0 0 0 40px #0000;
-   }
-}
 .app-service-status {
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   margin: 8rem auto;
+   margin: 8rem auto 3rem auto;
    width: 120px;
    height: 120px;
    border-radius: 50%;
    position: relative;
 }
-.app-service-status:before,
-.app-service-status:after {
-   content: '';
-   position: absolute;
-   inset: 0;
-   border-radius: inherit;
-   box-shadow: 0 0 0 0 var(--color);
-   color: var(--color-f);
-   animation: inherit;
-   animation-delay: -0.5s;
+.app-service-status.status__loading .app-icon {
+   fill: var(--accents-4);
 }
-.app-service-status:after {
-   animation-delay: -1s;
+.app-service-status.status__on .app-icon {
+   fill: var(--color-dark);
 }
-.app-service-status.status__loading {
-   background-color: var(--scolor);
-}
-.app-service-status.status__on {
-   background-color: var(--color);
-   box-shadow: 0 0 0 0 var(--color);
-   color: var(--color-f);
-   animation: pulse-anim 1.5s infinite linear;
-}
-.app-service-status.status__off {
-   background-color: var(--accents-7);
-   box-shadow: 0 0 0 0 var(--accents-7);
-   color: var(--accents-0);
+.app-service-status.status__off .app-icon {
+   fill: var(--accents-7);
 }
 </style>
