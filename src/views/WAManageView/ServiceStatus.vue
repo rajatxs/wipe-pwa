@@ -5,6 +5,7 @@ import HDDIcon from '../../assets/icons/hdd-fill.vue';
 const props = defineProps({
    loading: Boolean,
    status: Boolean,
+   lastRestartedTime: String,
 });
 
 const label = computed(function () {
@@ -28,6 +29,10 @@ const classes = computed(function () {
       <HDDIcon />
       <strong>{{ loading ? '...' : label }}</strong>
    </div>
+
+   <div v-if="lastRestartedTime" class="status-notes">
+      <small>Last restarted {{ lastRestartedTime }}</small>
+   </div>
 </template>
 
 <style>
@@ -50,5 +55,8 @@ const classes = computed(function () {
 }
 .app-service-status.status__off .app-icon {
    fill: var(--accents-7);
+}
+.status-notes {
+   text-align: center;
 }
 </style>
