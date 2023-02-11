@@ -3,6 +3,8 @@ import { ref, defineProps } from 'vue';
 import BottomActionSheet from '../../components/BottomActionSheet.vue';
 import { $put } from '../../utils/http';
 import { createToast } from '../../utils/toast';
+import { setValue } from '../../utils/store';
+import { WA_SERVICE_RESTART_TS_KEY } from '../../config';
 
 const loading = ref(false);
 const props = defineProps({
@@ -14,6 +16,7 @@ async function startService() {
    try {
       const response = await $put('/wa-socket/open');
       createToast('default', response.message);
+      setValue(WA_SERVICE_RESTART_TS_KEY, String(Date.now()));
    } catch (error) {
       createToast('error', error.message);
    }

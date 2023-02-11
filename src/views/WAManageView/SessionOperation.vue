@@ -58,6 +58,7 @@ async function restoreSession() {
    flex-direction: row;
    justify-content: center;
    gap: 1.6rem;
+   margin-top: 5rem;
 }
 .session-op {
    display: inline-flex;
