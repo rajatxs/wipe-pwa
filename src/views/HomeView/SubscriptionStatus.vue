@@ -6,6 +6,7 @@ import moment from 'moment';
 const UPDATE_INTERVAL = 5000;
 const id = ref(NaN);
 const active = ref(false);
+const activeTimeCount = ref('');
 const timestamp = ref('');
 const loading = ref(true);
 const timer = ref(null);
@@ -35,6 +36,12 @@ async function fetchLastKnownPresence() {
          timeString.value = moment(record.ts, true)
             .startOf('minute')
             .fromNow(false);
+
+         if (active.value) {
+            activeTimeCount.value = moment(record.ts, true)
+               .startOf('minutes')
+               .fromNow(true);
+         }
       }
    } catch (error) {
       console.error("Couldn't get last seen", error);
@@ -88,7 +95,7 @@ onMounted(async function () {
 <template>
    <div class="app-subs-status">
       <template v-if="loading">...</template>
-      <template v-else-if="active && show">online</template>
+      <template v-else-if="active && show">online &bull; {{ activeTimeCount }}</template>
       <template v-else-if="timestamp && show">{{ timeString }}</template>
       <template v-else>{{ fallback }}</template>
    </div>
