@@ -57,16 +57,6 @@ onMounted(function() {
 </template>
 
 <style>
-.presence-record {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   padding-left: 1.5rem;
-   padding-right: 1.5rem;
-   height: 56px;
-   border-bottom: 1px solid var(--accents-2);
-}
 .presence-duration {
    margin: 0;
    font-size: 18.5px;

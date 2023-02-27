@@ -42,6 +42,19 @@ onMounted(function () {
 </script>
 
 <template>
-   <DefaultView :records="records" />
-   <!-- <DetailedView /> -->
+   <!-- <DefaultView :records="records" /> -->
+   <DetailedView :records="records" />
 </template>
+
+<style>
+.presence-record {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   padding-left: 1.5rem;
+   padding-right: 1.5rem;
+   height: 56px;
+   border-bottom: 1px solid var(--accents-2);
+}
+</style>
