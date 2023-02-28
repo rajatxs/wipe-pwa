@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 import { $get } from '../../../utils/http';
+import { appPresenceViewMode } from '../../../config';
 import DefaultView from './DefaultView.vue';
 import DetailedView from './DetailedView.vue';
 import { createToast } from '../../../utils/toast';
@@ -10,6 +11,7 @@ const props = defineProps({
    limit: Number,
 });
 const records = ref([]);
+const viewMode = ref('');
 
 watch(() => props.limit, function() {
    fetchPresenceRecords();
@@ -38,12 +40,18 @@ async function fetchPresenceRecords() {
 
 onMounted(function () {
    fetchPresenceRecords();
+   viewMode.value = appPresenceViewMode();
 });
 </script>
 
 <template>
-   <!-- <DefaultView :records="records" /> -->
-   <DetailedView :records="records" />
+   <DefaultView 
+      v-if="viewMode === 'default'" 
+      :records="records" />
+
+   <DetailedView 
+      v-if="viewMode === 'detailed'" 
+      :records="records" />
 </template>
 
 <style>
