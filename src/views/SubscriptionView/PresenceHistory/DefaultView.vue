@@ -1,17 +1,14 @@
 <script setup>
-import { ref, watch, defineProps, onMounted } from 'vue';
+import { ref, onMounted, defineProps, watch } from 'vue';
 import moment from 'moment';
-import { $get } from '../../utils/http';
-import { createToast } from '../../utils/toast';
 
 const props = defineProps({
-   subsId: Number,
-   limit: Number,
+   records: Array,
 });
 const presenceSlots = ref([]);
 
-watch(() => props.limit, function() {
-   fetchPresenceRecords();
+watch(() => props.records, function() {
+   organizePresenceSlots(props.records);
 });
 
 /**
@@ -36,29 +33,8 @@ function organizePresenceSlots(records) {
    presenceSlots.value = slots;
 }
 
-async function fetchPresenceRecords() {
-   try {
-      const response = await $get(
-         '/presence',
-         {},
-         {
-            subid: props.subsId,
-            limit: props.limit,
-         }
-      );
-
-      if (Array.isArray(response.result)) {
-         organizePresenceSlots(Array.from(response.result));
-      } else {
-         throw new Error('Invalid response');
-      }
-   } catch (error) {
-      createToast('error', error.message);
-   }
-}
-
-onMounted(function () {
-   fetchPresenceRecords();
+onMounted(function() {
+   organizePresenceSlots(props.records);
 });
 </script>
 
@@ -79,3 +55,17 @@ onMounted(function () {
       </div>
    </div>
 </template>
+
+<style>
+.presence-duration {
+   margin: 0;
+   font-size: 18.5px;
+   line-height: 1rem;
+   font-weight: 500;
+}
+.presence-lastseen {
+   font-weight: 300;
+   font-size: 14px;
+   color: var(--accents-6);
+}
+</style>

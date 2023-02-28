@@ -3,6 +3,7 @@ import PushNotificationContext from './PushNotification.vue';
 import RemoveURLContext from './RemoteURL.vue';
 import AuthTokenContext from './AuthToken.vue';
 import ClearDataContext from './ClearData.vue';
+import PresenceViewMode from './PresenceViewMode.vue';
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import ClearDataContext from './ClearData.vue';
       <RemoveURLContext />
       <AuthTokenContext />
       <PushNotificationContext />
+      <PresenceViewMode />
       <ClearDataContext />
    </div>
 </template>
