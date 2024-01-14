@@ -1,10 +1,10 @@
 {
-  "name": "wipe-app",
-  "description": "Implementation of client app of wipe platform",
-  "version": "1.0.0",
+  "name": "@rxpm/wipe-app",
+  "description": "Implementation of the client app for the Wipe platform",
+  "version": "2.0.0",
   "author": {
     "name": "Rajat Sharma",
-    "email": "rxx175@gmail.com",
+    "email": "rajatxt@proton.me",
     "url": "https://github.com/rajatxs"
   },
   "scripts": {
@@ -12,6 +12,20 @@
     "build": "vite build",
     "preview": "vite preview --port 4173"
   },
+  "keywords": [
+    "wipe",
+    "whatsapp",
+    "wipe-client",
+    "wipe-app"
+  ],
+  "license": "ISC",
+  "repository": "https://github.com/rajatxs/wipe-pwa.git",
+  "readme": "https://github.com/rajatxs/wipe-pwa#readme",
+  "bugs": {
+    "email": "rajatxt@proton.me",
+    "url": "https://github.com/rajatxs/wipe-pwa/issues"
+  },
+  "markdown": "github",
   "dependencies": {
     "base64-js": "^1.5.1",
     "moment": "^2.29.4",
