@@ -12,7 +12,8 @@ import {
    SUBSCRIPTION_STORAGE_KEY, 
    getPayload, 
    hasPayload,
-   savePayload 
+   savePayload,
+   removePayload 
 } from '../../utils/storage';
 
 const subscriptions = ref([]);
@@ -38,6 +39,7 @@ async function updateEnabledStatus(enabled, id) {
       }
 
       createToast('primary', response.message);
+      removePayload(SUBSCRIPTION_STORAGE_KEY);
    } catch (error) {
       createToast('error', error.message);
    }

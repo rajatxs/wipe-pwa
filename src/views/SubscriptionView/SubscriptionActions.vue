@@ -33,6 +33,7 @@ async function deleteSubscription() {
    try {
       const response = await $delete('/subs/' + props.subsInfo.id);
       createToast('default', response.message);
+      removePayload(SUBSCRIPTION_STORAGE_KEY);
       emit('delete', props.subsInfo.id, response);
    } catch (error) {
       createToast('error', error.message);
