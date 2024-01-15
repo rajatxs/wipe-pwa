@@ -54,18 +54,25 @@ async function loadAllSubscriptions() {
       subscriptions.value = getPayload(SUBSCRIPTION_STORAGE_KEY);
    } else {
       try {
-         let result;
          const response = await $get('/subs');
 
-         result = Array.from(response.result);
+         /** @type {Array<any>} */
+         let result;
+
+         if (Array.isArray(response.result)) {
+            result = Array.from(response.result);
+         } else {
+            result = new Array();
+         }
    
-         if (result.length) {
+         if (result.length > 0) {
             savePayload(SUBSCRIPTION_STORAGE_KEY, result);
          }
    
          subscriptions.value = result;
       } catch (error) {
-         createToast('error', error.message);
+         console.error(error);
+         createToast('error', "Failed to get subscriptions");
       }
    }
 
