@@ -5,6 +5,17 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+   optimizeDeps: {
+      esbuildOptions: {
+         target: 'esnext',
+         supported: {
+            bigint: true,
+         },
+      }
+   },
+   build: {
+      target: ['esnext'],
+   },
    plugins: [
       vue(),
       VitePWA({
@@ -87,6 +98,7 @@ export default defineConfig({
    ],
    resolve: {
       alias: {
+         // @ts-ignore
          '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
    },
