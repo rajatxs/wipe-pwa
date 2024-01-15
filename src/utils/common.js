@@ -4,7 +4,7 @@
  * @param {'svg'|'png'} format
  */
 export function avatarUrl(seed, format = 'svg') {
-   return `https://avatars.dicebear.com/api/initials/${seed}.${format}?backgroundColorLevel=300&chars=1`;
+   return `https://api.dicebear.com/7.x/initials/${format}?seed=${seed}&backgroundType=solid&chars=1`;
 }
 
 /**

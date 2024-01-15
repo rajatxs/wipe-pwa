@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import { $post } from '../utils/http';
 import { createToast } from '../utils/toast';
+import { SUBSCRIPTION_STORAGE_KEY, removePayload } from '../utils/storage';
 
 export default defineComponent({
    name: 'AddSubscription',
@@ -31,6 +32,7 @@ export default defineComponent({
          try {
             await $post('/subs', {}, payload);
             createToast('primary', "Subscription added");
+            removePayload(SUBSCRIPTION_STORAGE_KEY);
             this.$router.push('/');
          } catch (error) {
             createToast('error', error.message);            

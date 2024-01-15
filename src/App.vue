@@ -36,7 +36,7 @@ export default defineComponent({
   <PWALoader />
   <Header></Header>
   <main class="app-main">
-    <RouterView />
+    <RouterView v-if="!requireToken" />
     <AuthModal 
       v-if="requireToken"
       @close="requireToken = false" />
