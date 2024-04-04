@@ -47,7 +47,7 @@ async function handlePushNotificationSetting(value) {
 
       try {
          const response = await uploadPushPayload(pushPayload);
-         setValue(PUSH_SUBS_ID, response.result.insertId);
+         setValue(PUSH_SUBS_ID, response.result.id);
          createToast('primary', 'Push notification enabled');
       } catch (error) {
          createToast('error', error.message);
