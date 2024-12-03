@@ -1,4 +1,4 @@
-import { PRESENCE_MSG_KEY, SERVICE_MSG_KEY, SOCKET_MSG_KEY } from './msg';
+import { PRESENCE_MSG_KEY, SERVICE_MSG_KEY, SOCKET_MSG_KEY, STATUS_ADDED } from './msg';
 
 /**
  * Parse `msgPayload` and show push notification
@@ -32,6 +32,14 @@ export function showPushNotification(msgPayload) {
                break;
             }
          }
+         break;
+      }
+      case STATUS_ADDED: {
+         const [ts] = args;
+         title = 'New status added';
+         body = 'Open the app to view updates';
+         tag = 'status';
+         timestamp = ts;
          break;
       }
    }
