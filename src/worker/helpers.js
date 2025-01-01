@@ -11,6 +11,8 @@ export function showPushNotification(msgPayload) {
       tag,
       timestamp = Date.now();
    const [type, ...args] = msgPayload;
+   let silent = true;
+   let vibrate = false;
 
    switch (type) {
       case PRESENCE_MSG_KEY: {
@@ -40,6 +42,8 @@ export function showPushNotification(msgPayload) {
          body = 'Open the app to view updates';
          tag = 'status';
          timestamp = ts;
+         silent = false;
+         vibrate = true;
          break;
       }
    }
@@ -51,6 +55,10 @@ export function showPushNotification(msgPayload) {
          badge, 
          tag,
          timestamp,
+         silent,
+         vibrate,
+         renotify: false,
+         requireInteraction: false,
       });
    } catch (error) {
       console.error("Couldn't show notification", error);

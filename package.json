@@ -1,7 +1,7 @@
 {
   "name": "@rxpm/wipe-app",
   "description": "Implementation of the client app for the Wipe platform",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "author": {
     "name": "Rajat Sharma",
     "email": "rajatxt@proton.me",
