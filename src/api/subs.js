@@ -30,3 +30,16 @@ export async function changeSubscriptionStatus(data) {
     );
     return response.status === 200;
 }
+
+/**
+ * Creates new subscription
+ * @param {object} data
+ * @param {string} data.alias
+ * @param {string} data.phone
+ * @param {string} data.event
+ * @returns {Promise<boolean>}
+ */
+export async function createSubscription(data) {
+    const response = await axios.post('/subs', data);
+    return response.status === 200;
+}
