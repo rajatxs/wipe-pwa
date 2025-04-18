@@ -1,109 +1,60 @@
 <script setup>
-import { ref, watch, defineProps, onMounted, onUnmounted } from 'vue';
-import { $get } from '../../utils/http';
+import { defineProps } from 'vue';
 import moment from 'moment';
+import { useQuery } from '@tanstack/vue-query';
+import { fetchLastPresenceRecord } from '../../api/presence';
 
-const UPDATE_INTERVAL = 5000;
-const id = ref(NaN);
-const active = ref(false);
-const activeTimeCount = ref('');
-const timestamp = ref('');
-const loading = ref(true);
-const timer = ref(null);
-const timeString = ref('');
 const props = defineProps({
-   show: Boolean,
-   subId: Number,
-   fallback: String,
+    show: {
+        type: Boolean,
+        default: false,
+    },
+    subId: {
+        type: Number,
+        required: true,
+    },
+    fallback: {
+        type: String,
+        default: '',
+    },
 });
 
-async function fetchLastKnownPresence() {
-   let record;
-
-   try {
-      const response = await $get(`/presence?subid=${props.subId}&limit=1`);
-
-      if (Array.isArray(response.result)) {
-         record = response.result[0];
-      } else {
-         record = response.result;
-      }
-
-      if (record) {
-         id.value = record.id;
-         active.value = Boolean(record.status);
-         timestamp.value = record.ts;
-         timeString.value = moment(record.ts, true)
-            .startOf('minute')
-            .fromNow(false);
-
-         if (active.value) {
-            activeTimeCount.value = moment(record.ts, true)
-               .startOf('minutes')
-               .fromNow(true);
-         }
-      }
-   } catch (error) {
-      console.error("Couldn't get last seen", error);
-   }
-
-   loading.value = false;
-}
-
-function registerInterval() {
-   if (timer.value) {
-      return;
-   }
-
-   timer.value = setInterval(async () => {
-      await fetchLastKnownPresence();
-   }, UPDATE_INTERVAL);
-}
-
-function unregisterInterval() {
-   if (timer.value) {
-      clearInterval(timer.value);
-      timer.value = null;
-   }
-}
-
-watch(
-   () => props.show,
-   (value) => {
-      if (value) {
-         registerInterval();
-      } else {
-         unregisterInterval();
-      }
-   }
-);
-
-onUnmounted(function () {
-   unregisterInterval();
+const { isLoading, data: presence } = useQuery({
+    enabled: props.show,
+    queryKey: ['last_presence', props.subId],
+    queryFn: () => fetchLastPresenceRecord(props.subId),
+    refetchInterval: 5000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchIntervalInBackground: false,
 });
 
-onMounted(async function () {
-   if (props.show) {
-      await fetchLastKnownPresence();
-      registerInterval();
-   } else {
-      loading.value = false;
-   }
-});
+/**
+ * Returns a human readable time string from the current time
+ * @param {string} date
+ * @returns {string}
+ */
+function getTimedifference(date) {
+    return moment(date, true).startOf('minutes').fromNow(true);
+}
+
+/**
+ * Returns a human readable time string
+ * @param {string} date
+ * @returns {string}
+ */
+function getReadableTime(date) {
+    return moment(date, true).startOf('minute').fromNow(false);
+}
 </script>
 
 <template>
-   <div class="app-subs-status">
-      <template v-if="loading">...</template>
-      <template v-else-if="active && show">online &bull; {{ activeTimeCount }}</template>
-      <template v-else-if="timestamp && show">{{ timeString }}</template>
-      <template v-else>{{ fallback }}</template>
-   </div>
+    <div class="text-xs text-neutral-500">
+        <span v-if="isLoading">...</span>
+        <template v-else-if="presence && props.show">
+            <span v-if="presence.status">online &bull; {{ getTimedifference(presence.timestamp) }}</span>
+            <span v-else>{{ getReadableTime(presence.timestamp) }}</span>
+        </template>
+        <span v-else>{{ fallback }}</span>
+    </div>
 </template>
-
-<style>
-.app-subs-status {
-   font-size: 12px;
-   color: var(--accents-5);
-}
-</style>
