@@ -1,12 +1,12 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useQuery, useMutation } from '@tanstack/vue-query';
-import LoaderView from '../../components/LoaderView.vue';
-import { fetchSubscriptions, changeSubscriptionStatus } from '../../api/subs';
-import SubscriptionStatus from './SubscriptionStatus.vue';
-import BellIcon from '../../assets/icons/bell.vue';
-import Switch from '../../components/Switch.vue';
-import { avatarUrl } from '../../utils/common';
+import { fetchSubscriptions, changeSubscriptionStatus } from '../api/subs';
+import BellIcon from '../assets/icons/bell.vue';
+import LoaderView from '../components/LoaderView.vue';
+import SubscriptionStatus from '../components/SubscriptionStatus.vue';
+import Switch from '../components/Switch.vue';
+import { avatarUrl } from '../utils/common';
 
 const {
     isLoading,
@@ -49,10 +49,7 @@ const toggleStatusMutation = useMutation({
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="font-medium leading-5">{{ sub.alias }}</div>
-                    <SubscriptionStatus
-                        :show="sub.enabled"
-                        :sub-id="sub.id"
-                        :fallback="sub.phone" />
+                    <SubscriptionStatus :show="sub.enabled" :sub-id="sub.id" :fallback="sub.phone" />
                 </div>
             </RouterLink>
             <div class="w-[20%] flex items-center pr-5 h-12">
