@@ -56,7 +56,7 @@ onBeforeMount(() => {
 
 <style>
 .app-header {
-    @apply fixed flex justify-center items-center top-0 left-0 right-0 w-full h-16 border-b z-10 border-neutral-200 bg-white;
+    @apply fixed flex justify-center items-center top-0 left-0 right-0 w-full h-16 border-b z-10 border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700;
 }
 
 .app-header__container {

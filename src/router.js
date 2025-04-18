@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeView from './views/Home.vue';
-import SettingsView from './views/SettingsView/SettingsView.vue';
+import SettingsView from './views/Settings.vue';
 import AddSubscriptionView from './views/AddSubscription.vue';
 import SubscriptionView from './views/SubscriptionView/SubscriptionView.vue';
 
