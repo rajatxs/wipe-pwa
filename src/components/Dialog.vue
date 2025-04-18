@@ -35,13 +35,13 @@ onMounted(function () {
 
 <style>
 .app-dialog {
-    @apply w-11/12 sm:w-1/2 sm:max-w-[380px] z-50 outline-none rounded-2xl bg-white;
+    @apply w-11/12 sm:w-1/2 sm:max-w-[380px] z-50 outline-none rounded-2xl bg-white dark:bg-neutral-900 dark:text-white;
 }
 .app-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
 .app-dialog__header {
-    @apply flex justify-between items-center px-5 h-16 font-bold border-b;
+    @apply flex justify-between items-center px-5 h-16 font-bold border-b dark:border-b-neutral-700;
 }
 .app-dialog__main {
     @apply p-5;
