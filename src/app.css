@@ -6,8 +6,12 @@
     @apply w-full p-3 border border-neutral-200 text-sm rounded-md outline-none ring ring-transparent focus:ring-emerald-500;
 }
 
-.app-textinput-label {
+.app-textinput-container {
     @apply p-2 space-y-1;
+}
+
+.app-textinput-label {
+    @apply block text-sm font-medium;
 }
 
 .app-button {

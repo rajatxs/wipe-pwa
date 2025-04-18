@@ -23,8 +23,8 @@ function handleSubmit() {
             </header>
 
             <form class="mt-5" @submit.prevent="handleSubmit">
-                <div class="app-textinput-label">
-                    <label for="serverUrl" class="block text-sm font-medium">Server URL</label>
+                <div class="app-textinput-container">
+                    <label for="serverUrl" class="app-textinput-label">Server URL</label>
                     <input
                         v-model="serverUrl"
                         type="url"
@@ -33,8 +33,8 @@ function handleSubmit() {
                         class="app-textinput"
                         required />
                 </div>
-                <div class="app-textinput-label">
-                    <label for="token" class="block text-sm font-medium">Token</label>
+                <div class="app-textinput-container">
+                    <label for="token" class="app-textinput-label">Token</label>
                     <input
                         v-model="token"
                         type="password"
