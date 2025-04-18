@@ -1,23 +1,17 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineProps, computed } from 'vue';
 
-export default defineComponent({
-   name: 'app-icon-button',
-   props: {
-      size: {
-         type: String,
-         default: 'medium',
-      },
+const props = defineProps({
+   size: {
+      type: String,
+      default: 'medium',
    },
-   computed: {
-      iconButtonClasses() {
-         return [
-            'app-icon-button',
-            'size__' + this.size,
-         ];
-      }
-   }
 });
+
+const iconButtonClasses = computed(() => [
+   'app-icon-button',
+   'size__' + props.size,
+]);
 </script>
 
 <template>
@@ -28,22 +22,16 @@ export default defineComponent({
 
 <style>
 .app-icon-button {
-   position: relative;
-   border-radius: 50%;
-   background-color: transparent;
-   cursor: pointer;
-   transition: background-color 120ms linear;
-   -webkit-tap-highlight-color: transparent;
+   @apply flex justify-center items-center w-10 h-10 rounded-full cursor-pointer transition-colors duration-150;
+}
+.app-icon-button:hover {
+   @apply bg-neutral-100;
 }
 .app-icon-button:active {
-   background-color: var(--accents-2);
+   @apply bg-neutral-200;
 }
 .app-icon-button svg {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   fill: var(--accents-5);
+   @apply fill-black;
 }
 
 .app-icon-button.size__small {
@@ -65,7 +53,7 @@ export default defineComponent({
 }
 @media (prefers-color-scheme: dark) {
    .app-icon-button {
-      background-color: transparent;
+      @apply bg-transparent;
    }
 }
 </style>

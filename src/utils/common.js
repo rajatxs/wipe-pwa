@@ -8,14 +8,6 @@ export function avatarUrl(seed, format = 'svg') {
 }
 
 /**
- * Returns new tag
- * @returns {string}
- */
-export function generateTag() {
-   return Math.floor(Math.random() * 10e6).toString(16);
-}
-
-/**
  * Returns readable string format of given `status`
  * @param {number} status 
  */

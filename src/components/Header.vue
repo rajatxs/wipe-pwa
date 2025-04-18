@@ -2,44 +2,30 @@
 import PlusCircleIcon from '../assets/icons/plus-circle.vue';
 import WhatsappIcon from '../assets/icons/whatsapp.vue';
 import NavigationTab from '../components/NavigationTab.vue';
+import IconButton from '../components/IconButton.vue';
 </script>
 
 <template>
    <header class="app-header">
-      <div class="app-header-actions-group">
-         <app-icon-button @click="$router.push('/wa')">
+      <div class="app-header__container">
+         <IconButton @click="$router.push('/wa')">
             <WhatsappIcon />
-         </app-icon-button>
+         </IconButton>
 
          <NavigationTab />
 
-         <app-icon-button @click="$router.push('/add')">
+         <IconButton @click="$router.push('/add')">
             <PlusCircleIcon />
-         </app-icon-button>
+         </IconButton>
       </div>
    </header>
 </template>
 
-<style scoped>
+<style>
 .app-header {
-   position: fixed;
-   top: 0;
-   left: 0;
-   right: 0;
-   width: 100%;
-   height: 64px;
-   border-bottom: 1px solid var(--accents-2);
-   background-color: var(--surface);
+   @apply fixed flex justify-center items-center top-0 left-0 right-0 w-full h-16 border-b z-10 border-neutral-200 bg-white;
 }
-.app-header-actions-group {
-   position: absolute;
-   display: flex;
-   left: 50%;
-   top: 50%;
-   width: calc(var(--scale-x) - 42px);
-   padding: 10px 14px;
-   justify-content: space-between;
-   align-items: center;
-   transform: translate(-50%, -50%);
+.app-header__container {
+   @apply w-full flex justify-between items-center max-w-[1080px] md:w-1/2 h-full px-3;
 }
 </style>
