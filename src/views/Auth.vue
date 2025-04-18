@@ -53,9 +53,9 @@ function handleSubmit() {
 
 <style>
 .auth-view {
-    @apply flex justify-center items-center w-screen h-screen bg-neutral-50;
+    @apply flex justify-center items-center w-screen h-screen bg-neutral-50 dark:bg-neutral-900 dark:text-white;
 }
 .auth-view__container {
-    @apply w-full md:w-[400px] h-full md:h-auto p-4 rounded-lg border-0 md:border border-neutral-200 shadow-md bg-white;
+    @apply w-full md:w-[400px] h-full md:h-auto p-4 rounded-lg border-0 md:border border-neutral-200 shadow-md bg-white dark:bg-neutral-800 dark:border-neutral-700;
 }
 </style>

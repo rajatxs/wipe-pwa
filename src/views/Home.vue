@@ -37,7 +37,7 @@ const toggleStatusMutation = useMutation({
     <LoaderView v-if="isLoading" message="Loading" />
     <div v-else-if="subs" class="flex flex-col py-5 w-full gap-2">
         <div v-for="sub in subs" :key="sub.id" class="subs-item">
-            <RouterLink class="subs-router-link hover:bg-neutral-100" :to="`/subs/${sub.id}`">
+            <RouterLink class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800" :to="`/subs/${sub.id}`">
                 <div class="relative w-12 h-12">
                     <img
                         :src="avatarUrl(sub.alias)"
@@ -79,6 +79,6 @@ const toggleStatusMutation = useMutation({
 }
 
 .subs-alert-badge {
-    @apply absolute w-5 h-5 top-[-3px] right-[-3px] p-1 bg-neutral-200 fill-neutral-500 rounded-full;
+    @apply absolute w-5 h-5 top-[-3px] right-[-3px] p-1 rounded-full bg-neutral-200 fill-neutral-500 dark:bg-neutral-700 dark:fill-white;
 }
 </style>
