@@ -1,50 +1,31 @@
-<script>
-import { defineComponent } from 'vue';
-import AuthModal from './components/AuthModal.vue';
+<script setup>
+import { ref, onBeforeMount } from 'vue';
 import { RouterView } from 'vue-router';
+import store from './utils/store';
+import AuthView from './views/Auth.vue';
 import Header from './components/Header.vue';
-import PWALoader from './components/PWALoader.vue';
-import { generateTag } from './utils/common';
-import { hasValue, setValue } from './utils/store';
 
-export default defineComponent({
-  name: 'App',
-  data() {
-    return {
-      requireToken: false,
-    }
-  },
-  components: {
-    AuthModal,
-    Header,
-    PWALoader,
-    RouterView,
-  },
-  created() {
-    if (!hasValue('tag')) {
-      setValue('tag', generateTag());
-    }
+const auth = ref(false);
 
-    if (!hasValue('token')) {
-      this.requireToken = true;
-    }
-  }
-})
+onBeforeMount(() => {
+   // If tag is not set
+   if (store.tag.length === 0) {
+      store.tag = Math.floor(Math.random() * 10e6).toString(16);
+   }
+
+   // If token or authToken is not set
+   if (store.serverUrl.length > 0 && store.token.length > 0) {
+      auth.value = true;
+   }
+});
 </script>
 
 <template>
-  <PWALoader />
-  <Header></Header>
-  <main class="app-main">
-    <RouterView v-if="!requireToken" />
-    <AuthModal 
-      v-if="requireToken"
-      @close="requireToken = false" />
-  </main>
+   <template v-if="auth">
+      <Header></Header>
+      <main class="mt-16 w-full max-w-[1080px] md:w-1/2 mx-auto h-full">
+         <RouterView />
+      </main>
+   </template>
+   <AuthView v-else @done="auth = true" />
 </template>
-
-<style scoped>
-.app-main {
-  margin-top: 64px;
-}
-</style>

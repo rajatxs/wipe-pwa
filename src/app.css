@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app-textinput {
+    @apply w-full p-3 border border-neutral-200 text-sm rounded-md outline-none ring ring-transparent focus:ring-emerald-500;
+}
+
+.app-textinput-label {
+    @apply p-2 space-y-1;
+}
+
+.app-button {
+    @apply w-full p-2 bg-emerald-500 text-white text-sm rounded-md transition-colors hover:bg-emerald-600;
+}
