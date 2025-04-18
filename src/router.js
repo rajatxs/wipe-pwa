@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeView from './views/Home.vue';
 import SettingsView from './views/SettingsView/SettingsView.vue';
 import AddSubscriptionView from './views/AddSubscription.vue';
-import WAManageView from './views/WAManageView/WAManageView.vue';
 import SubscriptionView from './views/SubscriptionView/SubscriptionView.vue';
 
 const router = createRouter({
@@ -22,11 +21,6 @@ const router = createRouter({
             path: '/add',
             name: 'AddSubscription',
             component: AddSubscriptionView,
-        },
-        {
-            path: '/wa',
-            name: 'WAManager',
-            component: WAManageView,
         },
         {
             path: '/subs/:id',
