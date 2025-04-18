@@ -1,3 +1,14 @@
+import moment from 'moment';
+
+/**
+ * Returns a human readable time string
+ * @param {string|Date} date
+ * @returns {string}
+ */
+export function getReadableTime(date) {
+   return moment(date, true).startOf('minute').fromNow(false);
+}
+
 /**
  * Returns absolute url of avatar
  * @param {string} seed
