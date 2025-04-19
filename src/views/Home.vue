@@ -1,5 +1,5 @@
 <script setup>
-import { toRaw } from 'vue';
+import { toRaw, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import { fetchSubscriptions, changeSubscriptionStatus } from '../api/subs';
@@ -9,12 +9,14 @@ import NotificationIcon from '../icons/notification.vue';
 import LoaderView from '../components/LoaderView.vue';
 import SubscriptionStatus from '../components/SubscriptionStatus.vue';
 import Switch from '../components/Switch.vue';
+import store from '../utils/store';
 
 const client = useQueryClient();
 const router = useRouter();
 const {
     isLoading,
     data: subs,
+    isFetchedAfterMount,
     refetch,
     error,
 } = useQuery({
@@ -22,6 +24,7 @@ const {
     queryKey: ['subs'],
     queryFn: fetchSubscriptions,
     refetchOnMount: true,
+    initialData: store.getSubscriptions(),
     refetchInterval: 5000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
@@ -45,6 +48,11 @@ function handleViewPresence(sub) {
     client.setQueryData(['subs', rawSub.id], rawSub);
     router.push(`/subs/${rawSub.id}`);
 }
+
+watch(isFetchedAfterMount, () => {
+    const raw = toRaw(subs.value);
+    store.setSubscriptions(raw);
+});
 </script>
 
 <template>
