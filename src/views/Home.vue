@@ -1,13 +1,17 @@
 <script setup>
-import { RouterLink } from 'vue-router';
-import { useQuery, useMutation } from '@tanstack/vue-query';
+import { toRaw } from 'vue';
+import { useRouter } from 'vue-router';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import { fetchSubscriptions, changeSubscriptionStatus } from '../api/subs';
 import BellIcon from '../assets/icons/bell.vue';
 import LoaderView from '../components/LoaderView.vue';
+import { Subscription } from '../models/Subscription';
 import SubscriptionStatus from '../components/SubscriptionStatus.vue';
 import Switch from '../components/Switch.vue';
 import { avatarUrl } from '../utils/common';
 
+const client = useQueryClient();
+const router = useRouter();
 const {
     isLoading,
     data: subs,
@@ -31,13 +35,23 @@ const toggleStatusMutation = useMutation({
         alert('Unable to update subscription status');
     },
 });
+
+/**
+ * Handles the view presence action
+ * @param {Subscription} sub
+ */
+function handleViewPresence(sub) {
+    const rawSub = toRaw(sub);
+    client.setQueryData(['subs', rawSub.id], rawSub);
+    router.push(`/subs/${rawSub.id}`);
+}
 </script>
 
 <template>
     <LoaderView v-if="isLoading" message="Loading" />
     <div v-else-if="subs" class="flex flex-col py-5 w-full gap-2">
         <div v-for="sub in subs" :key="sub.id" class="subs-item">
-            <RouterLink class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800" :to="`/subs/${sub.id}`">
+            <div role="button" class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800" @click="handleViewPresence(sub)">
                 <div class="relative w-12 h-12">
                     <img
                         :src="avatarUrl(sub.alias)"
@@ -52,8 +66,8 @@ const toggleStatusMutation = useMutation({
                     <div class="font-medium leading-5">{{ sub.alias }}</div>
                     <SubscriptionStatus :show="sub.enabled" :sub-id="sub.id" :fallback="sub.phone" />
                 </div>
-            </RouterLink>
-            <div class="w-[20%] flex items-center pr-5 h-12">
+            </div>
+            <div class="w-[20%] flex items-center justify-end pr-5 h-12">
                 <Switch
                     :id="`sub-switch-${sub.id}`"
                     :value="sub.enabled"
