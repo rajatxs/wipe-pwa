@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeView from './views/Home.vue';
 import SettingsView from './views/Settings.vue';
 import AddSubscriptionView from './views/AddSubscription.vue';
-import SubscriptionView from './views/SubscriptionView/SubscriptionView.vue';
+import PresenceView from './views/Presense.vue';
 
 const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -25,7 +25,7 @@ const router = createRouter({
         {
             path: '/subs/:id',
             name: 'Subscription',
-            component: SubscriptionView,
+            component: PresenceView,
         },
     ],
 });
