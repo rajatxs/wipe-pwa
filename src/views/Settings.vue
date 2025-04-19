@@ -5,16 +5,20 @@ import store from '../utils/store';
 
 const router = useRouter();
 
+/** Clears saved data from the browser */
 function clearData() {
-    // TODO: Include storage clearing operations
+    store.clearCache();
 }
 
+/** Logs out the user */
 function logout() {
     const permission = confirm('Are you sure you want to logout?');
+
     if (permission) {
         store.serverUrl = '';
         store.token = '';
         appState.auth = false;
+        store.clearCache();
         router.replace('/');
     }
 }
