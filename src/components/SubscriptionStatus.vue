@@ -3,6 +3,7 @@ import { defineProps } from 'vue';
 import moment from 'moment';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchLastPresenceRecord } from '../api/presence';
+import { getReadableTime } from '../utils/common';
 
 const props = defineProps({
     show: {
@@ -36,15 +37,6 @@ const { isLoading, data: presence } = useQuery({
  */
 function getTimedifference(date) {
     return moment(date, true).startOf('minutes').fromNow(true);
-}
-
-/**
- * Returns a human readable time string
- * @param {string} date
- * @returns {string}
- */
-function getReadableTime(date) {
-    return moment(date, true).startOf('minute').fromNow(false);
 }
 </script>
 

@@ -1,58 +1,29 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import Dialog from './Dialog.vue';
 import { useRegisterSW } from 'virtual:pwa-register/vue';
-import Modal from './Modal.vue';
 
-const { updateServiceWorker } = useRegisterSW();
+const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
-export default defineComponent({
-   name: 'PWALoader',
-   components: {
-      Modal,
-   },
-   setup() {
-      const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
-      const close = async () => {
-         offlineReady.value = false;
-         needRefresh.value = false;
-      };
-      return { offlineReady, needRefresh, updateServiceWorker, close };
-   },
-   methods: {
-      async close() {
-         // @ts-ignore
-         this.offlineReady.value = false;
-         // @ts-ignore
-         this.needRefresh.value = false;
-      },
-      async update() {
-         await updateServiceWorker();
-      },
-   },
-});
+function close() {
+   offlineReady.value = false;
+   needRefresh.value = false;
+}
 </script>
 
 <template>
-   <Modal v-if="offlineReady || needRefresh" :header="false">
+   <Dialog v-if="offlineReady || needRefresh" title="App updated" @close="close">
       <div class="flex flex-wrap" role="alert">
-         <div class="message mt-1">
-            <span v-if="offlineReady">App ready to work offline</span>
-            <span v-else>New content available, click on reload button to update.</span>
-         </div>
+         <span v-if="offlineReady">App is ready to work offline.</span>
+         <span v-else>New content is available. Click the reload button to update.</span>
       </div>
 
-      <template #footer>
-         <app-button 
-            @click="close" 
-            fill="default">
+      <div class="mt-5">
+         <button class="app-button" @click="close">
             Close
-         </app-button>
-         <app-button 
-            v-if="needRefresh" 
-            @click="update()" 
-            fill="primary">
+         </button>
+         <button v-if="needRefresh" class="app-button" @click="updateServiceWorker()">
             Reload
-         </app-button>
-      </template>
-   </Modal>
+         </button>
+      </div>
+   </Dialog>
 </template>

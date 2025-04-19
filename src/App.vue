@@ -7,6 +7,7 @@ import AuthView from './views/Auth.vue';
 import PlusCircleIcon from './assets/icons/plus-circle.vue';
 import WhatsappIcon from './assets/icons/whatsapp.vue';
 import NavigationTab from './components/NavigationTab.vue';
+import PWALoader from './components/PWALoader.vue';
 import IconButton from './components/IconButton.vue';
 import WAServiceDialog from './components/WAServiceDialog.vue';
 import AddSubscriptionDialog from './components/AddSubscriptionDialog.vue';
@@ -28,6 +29,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
+    <PWALoader />
     <template v-if="appState.auth">
         <header class="app-header">
             <div class="app-container app-header__container">
