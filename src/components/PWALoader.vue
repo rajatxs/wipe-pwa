@@ -17,7 +17,7 @@ function close() {
          <span v-else>New content is available. Click the reload button to update.</span>
       </div>
 
-      <div class="flex flex-row gap-2 mt-5">
+      <div class="flex flex-row gap-3 mt-5">
          <button class="app-button" @click="close">Close</button>
          <button v-if="needRefresh" class="app-button" @click="updateServiceWorker()">Reload</button>
       </div>

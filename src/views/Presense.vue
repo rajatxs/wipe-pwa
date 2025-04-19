@@ -61,7 +61,7 @@ watch(limit, refetchRecords);
 </script>
 
 <template>
-    <div class="pb-36">
+    <div class="pb-36 pt-3">
         <div v-for="record in records" :key="record['id']"
             :class="['presence-record', 'presence-detailed-record', { 'presence-record-active': record.status }]">
             <div class="left">
