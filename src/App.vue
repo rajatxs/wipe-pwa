@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import { RouterView } from 'vue-router';
+import appState from './state.js';
 import store from './utils/store';
 import AuthView from './views/Auth.vue';
 import PlusCircleIcon from './assets/icons/plus-circle.vue';
@@ -10,7 +11,6 @@ import IconButton from './components/IconButton.vue';
 import WAServiceDialog from './components/WAServiceDialog.vue';
 import AddSubscriptionDialog from './components/AddSubscriptionDialog.vue';
 
-const auth = ref(false);
 const viewWAServiceDialog = ref(false);
 const viewAddSubscriptionDialog = ref(false);
 
@@ -22,15 +22,15 @@ onBeforeMount(() => {
 
     // If token or authToken is not set
     if (store.serverUrl.length > 0 && store.token.length > 0) {
-        auth.value = true;
+        appState.auth = true;
     }
 });
 </script>
 
 <template>
-    <template v-if="auth">
+    <template v-if="appState.auth">
         <header class="app-header">
-            <div class="app-header__container">
+            <div class="app-container app-header__container">
                 <IconButton @click="viewWAServiceDialog = true">
                     <WhatsappIcon />
                 </IconButton>
@@ -41,7 +41,7 @@ onBeforeMount(() => {
             </div>
         </header>
 
-        <main class="mt-16 w-full max-w-[1080px] md:w-1/2 mx-auto h-full">
+        <main class="app-container mt-16 mx-auto h-full">
             <RouterView />
         </main>
 
@@ -51,15 +51,15 @@ onBeforeMount(() => {
             @added="viewAddSubscriptionDialog = false"
             @close="viewAddSubscriptionDialog = false" />
     </template>
-    <AuthView v-else @done="auth = true" />
+    <AuthView v-else @done="appState.auth = true" />
 </template>
 
 <style>
 .app-header {
-    @apply fixed flex justify-center items-center top-0 left-0 right-0 w-full h-16 border-b z-10 border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700;
+    @apply fixed flex justify-center items-center top-0 left-0 right-0 w-full h-16 border-b z-10 backdrop-blur-md border-neutral-200 bg-white/80 dark:bg-neutral-800/80 dark:border-neutral-700;
 }
 
 .app-header__container {
-    @apply w-full flex justify-between items-center max-w-[1080px] md:w-1/2 h-full px-3;
+    @apply flex justify-between items-center h-full px-5;
 }
 </style>

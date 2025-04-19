@@ -1,5 +1,9 @@
 <script setup>
+import { useRouter } from 'vue-router';
+import appState from '../state';
 import store from '../utils/store';
+
+const router = useRouter();
 
 function clearData() {
     // TODO: Include storage clearing operations
@@ -10,9 +14,8 @@ function logout() {
     if (permission) {
         store.serverUrl = '';
         store.token = '';
-
-        // TODO: Use global state to logout
-        window.location.reload();
+        appState.auth = false;
+        router.replace('/');
     }
 }
 </script>
