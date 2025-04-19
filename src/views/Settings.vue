@@ -1,9 +1,12 @@
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import appState from '../state';
 import store from '../utils/store';
+import AboutDialog from '../components/AboutDialog.vue';
 
 const router = useRouter();
+const viewAboutDialog = ref(false);
 
 /** Clears saved data from the browser */
 function clearData() {
@@ -30,11 +33,16 @@ function logout() {
             <h5 class="app-setting-item__title">Clear cache</h5>
             <span class="app-setting-item__desc">Clear saved data from the browser</span>
         </div>
+        <div class="app-setting-item" role="button" id="about-setting" @click="viewAboutDialog = true">
+            <h5 class="app-setting-item__title">About</h5>
+            <span class="app-setting-item__desc">App version and other information</span>
+        </div>
         <div class="app-setting-item" role="button" id="logout-setting" @click="logout">
             <h5 class="app-setting-item__title">Logout</h5>
             <span class="app-setting-item__desc">Logout from the current session</span>
         </div>
     </div>
+    <AboutDialog v-if="viewAboutDialog" @close="viewAboutDialog = false" />
 </template>
 
 <style>
