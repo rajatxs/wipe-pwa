@@ -1,10 +1,32 @@
+/** @type {Map<string, number|string|boolean>} */
+var cacheMap = new Map();
+
+/**
+ * Returns string value from localStorage with cache
+ * @param {string} key
+ * @returns {string}
+ */
+function getString(key) {
+   if (cacheMap.has(key)) {
+      return cacheMap.get(key);
+   } else {
+      cacheMap.set(key, localStorage.getItem(key) || '');
+      return cacheMap.get(key);
+   }
+}
+
 export default {
+   /** Clears store cache */
+   clearCache() {
+      cacheMap.clear();
+   },
+
    /**
     * Returns tag
     * @type {string}
     */
    get tag() {
-      return localStorage.getItem('wipe_tag') || '';
+      return getString('wipe_tag');
    },
 
    /**
@@ -20,7 +42,7 @@ export default {
     * @type {string}
     */
    get serverUrl() {
-      return localStorage.getItem('wipe_server_url') || '';
+      return getString('wipe_server_url');
    },
 
    /**
@@ -36,7 +58,7 @@ export default {
     * @type {string}
     */
    get token() {
-      return localStorage.getItem('wipe_token') || '';
+      return getString('wipe_token');
    },
 
    /**
