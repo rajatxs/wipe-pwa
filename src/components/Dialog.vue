@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, defineEmits, defineProps } from 'vue';
 import IconButton from './IconButton.vue';
-import CloseIcon from '../assets/icons/close.vue';
+import CloseIcon from '../icons/close.vue';
 
 const dialogRef = ref(null);
 const emit = defineEmits(['close']);

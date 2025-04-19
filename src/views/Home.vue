@@ -3,12 +3,12 @@ import { toRaw } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import { fetchSubscriptions, changeSubscriptionStatus } from '../api/subs';
-import BellIcon from '../assets/icons/bell.vue';
-import LoaderView from '../components/LoaderView.vue';
 import { Subscription } from '../models/Subscription';
+import { avatarUrl } from '../utils/common';
+import NotificationIcon from '../icons/notification.vue';
+import LoaderView from '../components/LoaderView.vue';
 import SubscriptionStatus from '../components/SubscriptionStatus.vue';
 import Switch from '../components/Switch.vue';
-import { avatarUrl } from '../utils/common';
 
 const client = useQueryClient();
 const router = useRouter();
@@ -60,7 +60,7 @@ function handleViewPresence(sub) {
                         width="46"
                         height="46"
                         class="rounded-full" />
-                    <BellIcon v-if="sub.notify" class="subs-alert-badge" />
+                    <NotificationIcon v-if="sub.notify" class="subs-alert-badge" />
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="font-medium leading-5">{{ sub.alias }}</div>

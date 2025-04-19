@@ -1,7 +1,7 @@
 <script setup>
 import { useQuery } from '@tanstack/vue-query';
 import Dialog from './Dialog.vue';
-import HDDIcon from '../assets/icons/hdd-fill.vue';
+import HDDIcon from '../icons/hdd-fill.vue';
 import { fetchServerStatus, startWAServer, stopWAServer } from '../api/common';
 import { getReadableTime } from '../utils/common';
 

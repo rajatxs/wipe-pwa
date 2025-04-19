@@ -6,9 +6,9 @@ import { useQuery, useMutation } from '@tanstack/vue-query';
 import { fetchSubscription, deleteSubscription, changeSubscriptionNotification } from '../api/subs';
 import { fetchPresenceRecords } from '../api/presence';
 import LoaderView from '../components/LoaderView.vue';
-import TrashIcon from '../assets/icons/trash.vue';
-import NotificationIcon from '../assets/icons/notification.vue';
-import NotificationOffIcon from '../assets/icons/notification-off.vue';
+import TrashIcon from '../icons/trash.vue';
+import NotificationIcon from '../icons/notification.vue';
+import NotificationOffIcon from '../icons/notification-off.vue';
 import IconButton from '../components/IconButton.vue';
 
 const route = useRoute();
