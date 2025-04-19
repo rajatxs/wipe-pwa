@@ -15,3 +15,18 @@ export async function fetchLastPresenceRecord(subId) {
         return null;
     }
 }
+
+/**
+ * Gets presence records
+ * @param {number} subId - Subscription Id
+ * @param {number} limit - Number of records to fetch
+ * @returns {Promise<PresenceRecord[]>}
+ */
+export async function fetchPresenceRecords(subId, limit) {
+    const response = await axios.get(`/presence?subid=${subId}&limit=${limit}`);
+    if (Array.isArray(response.data.result)) {
+        return response.data.result.map(PresenceRecord.parseResponse);
+    } else {
+        return [];
+    }
+}
