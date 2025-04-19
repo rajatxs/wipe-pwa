@@ -62,7 +62,8 @@ watch(limit, refetchRecords);
 
 <template>
     <div class="pb-36">
-        <div v-for="record in records" :key="record['id']" class="presence-record presence-detailed-record">
+        <div v-for="record in records" :key="record['id']"
+            :class="['presence-record', 'presence-detailed-record', { 'presence-record-active': record.status }]">
             <div class="left">
                 <span>{{ moment(record.timestamp, false).format('L LT') }}</span>
             </div>
@@ -72,13 +73,12 @@ watch(limit, refetchRecords);
             </div>
 
             <div class="right">
-                <span v-if="record.status" class="text-emerald-500">online</span>
-                <span v-else class="text-neutral-500">offline</span>
+                <span>{{ record.status ? 'online' : 'offline' }}</span>
             </div>
         </div>
 
         <template v-if="isRecordFetched">
-            <div v-if="records.length > 0" class="w-48 mt-3 mx-auto">
+            <div v-if="records.length > 0" class="w-48 mt-5 mx-auto">
                 <button class="app-button" @click="limit += 50">Show more records</button>
             </div>
             <div v-else class="p-16 text-center font-medium">
@@ -110,7 +110,11 @@ watch(limit, refetchRecords);
 
 <style>
 .presence-record {
-    @apply flex flex-row justify-between items-center px-8 h-14 border-b border-neutral-200 dark:border-neutral-700;
+    @apply flex flex-row justify-between items-center h-14 mx-5 px-5 rounded-lg;
+}
+
+.presence-record-active {
+    @apply font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-white;
 }
 
 .presence-view-toolbar {

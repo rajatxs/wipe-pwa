@@ -27,7 +27,7 @@ function logout() {
 <template>
     <div class="settings-view flex flex-col p-5 gap-3">
         <div class="app-setting-item" role="button" id="clear-data-setting" @click="clearData">
-            <h5 class="app-setting-item__title">Clear data</h5>
+            <h5 class="app-setting-item__title">Clear cache</h5>
             <span class="app-setting-item__desc">Clear saved data from the browser</span>
         </div>
         <div class="app-setting-item" role="button" id="logout-setting" @click="logout">
