@@ -1,3 +1,5 @@
+import { Subscription } from '../models/Subscription';
+
 /** @type {Map<string, number|string|boolean>} */
 var cacheMap = new Map();
 
@@ -19,6 +21,7 @@ export default {
    /** Clears store cache */
    clearCache() {
       cacheMap.clear();
+      localStorage.removeItem('wipe_subs');
    },
 
    /**
@@ -68,4 +71,21 @@ export default {
    set token(value) {
       localStorage.setItem('wipe_token', String(value));
    },
+
+   /**
+    * Returns subscriptions
+    * @type {Subscription[]}
+    */
+   getSubscriptions() {
+      const raw = localStorage.getItem('wipe_subs') || '[]';
+      return JSON.parse(raw).map(Subscription.parseResponse);
+   },
+
+   /**
+    * Sets new subscriptions
+    * @param {Subscription[]} value
+    */
+   setSubscriptions(value) {
+      localStorage.setItem('wipe_subs', JSON.stringify(value));
+   }
 };
