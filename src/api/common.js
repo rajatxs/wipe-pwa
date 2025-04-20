@@ -15,6 +15,20 @@ export async function fetchServerStatus() {
 }
 
 /**
+ * Gets server info
+ * @returns {Promise<{ mode: string, version: string }>}
+ */
+export async function fetchServerInfo() {
+    const response = await axios.get('/info');
+    const result = response.data.result;
+
+    return {
+        mode: result.mode || '',
+        version: result.version || '',
+    };
+}
+
+/**
  * Starts WA server
  * @returns {Promise<boolean>}
  */
