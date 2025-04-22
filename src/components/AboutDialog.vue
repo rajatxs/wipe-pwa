@@ -22,7 +22,7 @@ const { data: serverInfo } = useQuery({
 
 <template>
     <Dialog title="About">
-        <div class="flex flex-col gap-3 max-h-screen overflow-y-auto">
+        <div class="flex flex-col gap-3 max-h-[380px] overflow-y-auto">
             <!-- Version -->
             <div class="app-info-item" id="version-info">
                 <h5 class="app-info-item__title">Version</h5>
