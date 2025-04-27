@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineEmits, defineProps } from 'vue';
+import { ref, onMounted } from 'vue';
 import IconButton from './IconButton.vue';
 import CloseIcon from '../icons/close.vue';
 

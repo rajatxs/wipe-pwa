@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import store from '../utils/store';
 
 const emit = defineEmits(['done']);
