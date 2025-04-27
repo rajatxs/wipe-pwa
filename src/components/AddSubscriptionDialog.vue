@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import { fetchSubscriptions, createSubscription } from '../api/subs';
 import Dialog from './Dialog.vue';

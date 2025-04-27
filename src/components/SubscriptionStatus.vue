@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import moment from 'moment';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchLastPresenceRecord } from '../api/presence';
