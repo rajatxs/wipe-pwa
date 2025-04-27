@@ -39,7 +39,6 @@ export default defineConfig({
             '/android-icon-144x144.png',
             '/android-icon-192x192.png',
             '/android-icon-512x512.png',
-            '/img/no-data.svg',
          ],
          strategies: 'injectManifest',
          manifest: {

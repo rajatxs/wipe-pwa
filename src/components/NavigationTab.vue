@@ -4,16 +4,10 @@ import { RouterLink } from 'vue-router';
 
 <template>
    <nav class="app-navigation-tab">
-      <RouterLink 
-         to="/" 
-         active-class="active" 
-         class="app-navigation-tab-item">
+      <RouterLink to="/" active-class="active" class="app-navigation-tab-item">
          Home
       </RouterLink>
-      <RouterLink 
-         to="/settings" 
-         exact-active-class="active"
-         class="app-navigation-tab-item">
+      <RouterLink to="/settings" exact-active-class="active" class="app-navigation-tab-item">
          Settings
       </RouterLink>
    </nav>
@@ -21,34 +15,18 @@ import { RouterLink } from 'vue-router';
 
 <style scoped>
 .app-navigation-tab {
-   display: flex;
-   min-width: 160px;
-   height: 34px;
-   padding: 6px;
-   gap: 4px;
-   border-radius: 25px;
-   background-color: var(--accents-1);
+   @apply flex min-w-[200px] p-1 h-[46px] gap-2 rounded-full;
 }
+
 .app-navigation-tab-item {
-   display: inherit;
-   justify-content: space-around;
-   align-items: center;
-   min-width: 95px;
-   font-size: 90%;
-   font-weight: 500;
-   border-radius: inherit;
-   background-color: transparent;
-   color: var(--surface-f);
-   text-decoration: none;
-   font-family: var(--primary-font);
-   -webkit-tap-highlight-color: transparent;
-   transition: background-color 90ms linear;
+   @apply flex justify-center items-center w-full h-full rounded-full text-black font-medium transition-colors duration-150 bg-neutral-100 dark:bg-neutral-700 dark:text-white;
 }
+
 .app-navigation-tab-item.active {
-   background-color: var(--color);
-   color: var(--color-f);
+   @apply bg-emerald-500 text-white;
 }
-.app-navigation-tab-item:not(.active):hover {
-   background-color: var(--accents-2);
+
+.app-navigation-tab-item:not(.active):active {
+   @apply bg-neutral-200 dark:bg-neutral-700;
 }
 </style>

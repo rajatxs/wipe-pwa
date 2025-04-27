@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app-textinput {
+    @apply w-full p-3 border border-neutral-200 text-sm rounded-md outline-none ring ring-transparent focus:ring-emerald-500 dark:bg-neutral-800 dark:border-neutral-700;
+}
+
+.app-textinput-container {
+    @apply p-2 space-y-1;
+}
+
+.app-textinput-label {
+    @apply block text-sm font-medium;
+}
+
+.app-button {
+    @apply w-full p-2 bg-emerald-500 text-white text-sm rounded-md transition-colors outline-none hover:bg-emerald-600;
+}
+
+.app-container {
+    @apply w-full max-w-[1080px] md:w-1/2;
+}

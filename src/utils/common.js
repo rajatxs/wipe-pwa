@@ -1,3 +1,14 @@
+import moment from 'moment';
+
+/**
+ * Returns a human readable time string
+ * @param {string|Date} date
+ * @returns {string}
+ */
+export function getReadableTime(date) {
+   return moment(date, true).startOf('minute').fromNow(false);
+}
+
 /**
  * Returns absolute url of avatar
  * @param {string} seed
@@ -5,14 +16,6 @@
  */
 export function avatarUrl(seed, format = 'svg') {
    return `https://api.dicebear.com/7.x/initials/${format}?seed=${seed}&backgroundType=solid&chars=1`;
-}
-
-/**
- * Returns new tag
- * @returns {string}
- */
-export function generateTag() {
-   return Math.floor(Math.random() * 10e6).toString(16);
 }
 
 /**

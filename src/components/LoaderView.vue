@@ -1,33 +1,26 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineProps } from 'vue';
+import Loader from './Loader.vue';
 
-export default defineComponent({
-   name: 'LoaderView',
-   props: {
-      message: {
-         type: String,
-         required: false,
-      }
-   }
+const props = defineProps({
+    message: {
+        type: String,
+        required: false,
+    },
 });
 </script>
 
 <template>
-   <div class="app-loader-view">
-      <app-loader size="28px"></app-loader>
-      <p v-if="message"><small>{{ message }}</small></p>
-   </div>
+    <div class="app-loader-view">
+        <Loader size="28px" class="w-8 h-8 border-4 border-emerald-500"></Loader>
+        <p v-if="message">
+            <small>{{ message }}</small>
+        </p>
+    </div>
 </template>
 
 <style>
 .app-loader-view {
-   padding-top: 12px;
-   padding-bottom: 12px;
-   min-height: 340px;
-   gap: 20px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+    @apply w-full h-3/5 flex flex-col py-10 gap-2 justify-center items-center overflow-hidden;
 }
 </style>
