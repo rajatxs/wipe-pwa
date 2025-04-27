@@ -1,12 +1,12 @@
 {
-   "name": "@rxpm/wipe-app",
-   "description": "Implementation of the client app for the Wipe platform",
+   "name": "@rxpm/wipe-web",
+   "description": "Implemented the client app for the Wipe platform",
    "version": "2.1.0",
    "type": "module",
    "author": {
       "name": "Rajat Sharma",
       "email": "rajatxt@proton.me",
-      "url": "https://bitbucket.org/rajatxs"
+      "url": "https://github.com/rajatxs"
    },
    "scripts": {
       "dev": "vite",
@@ -20,16 +20,11 @@
       "wipe-app"
    ],
    "license": "ISC",
-   "repository": "https://bitbucket.org/rajatxs/wipe-web.git",
+   "repository": "https://github.com/rajatxs/wipe-pwa.git",
    "dependencies": {
-      "@tailwindcss/vite": "^4.1.4",
       "@tanstack/vue-query": "^5.74.4",
       "axios": "^1.8.4",
-      "base64-js": "^1.5.1",
-      "i": "^0.3.7",
       "moment": "^2.29.4",
-      "msgpackr": "^1.6.2",
-      "npm": "^11.3.0",
       "vue": "^3.2.37",
       "vue-router": "^4.1.3"
    },
