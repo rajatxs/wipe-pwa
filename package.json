@@ -1,7 +1,7 @@
 {
    "name": "@rxpm/wipe-web",
    "description": "Implemented the client app for the Wipe platform",
-   "version": "2.1.0",
+   "version": "2.1.4",
    "type": "module",
    "author": {
       "name": "Rajat Sharma",
@@ -15,12 +15,16 @@
    },
    "keywords": [
       "wipe",
-      "whatsapp",
-      "wipe-client",
-      "wipe-app"
+      "wipe-web"
    ],
    "license": "ISC",
-   "repository": "https://github.com/rajatxs/wipe-pwa.git",
+   "markdown": "github",
+   "repository": "https://github.com/rajatxs/wipe-web.git",
+   "readme": "https://github.com/rajatxs/wipe-web?tab=readme-ov-file#readme",
+   "bugs": {
+      "email": "rajatxt@proton.me",
+      "url": "https://github.com/rajatxs/wipe-web/issues"
+   },
    "dependencies": {
       "@tanstack/vue-query": "^5.74.4",
       "axios": "^1.8.4",
