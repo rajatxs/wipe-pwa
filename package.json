@@ -1,7 +1,7 @@
 {
    "name": "@rxpm/wipe-web",
    "description": "Implemented the client app for the Wipe platform",
-   "version": "2.1.4",
+   "version": "2.1.5",
    "type": "module",
    "author": {
       "name": "Rajat Sharma",
