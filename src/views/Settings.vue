@@ -4,9 +4,16 @@ import { useRouter } from 'vue-router';
 import appState from '../state';
 import store from '../utils/store';
 import AboutDialog from '../components/AboutDialog.vue';
+import Switch from '../components/Switch.vue';
 
 const router = useRouter();
 const viewAboutDialog = ref(false);
+
+/** Sets view all subscriptions event */
+function setViewAllSubscriptions(value) {
+    store.viewAllSubscriptions = value;
+    appState.viewAllSubscriptions = value;
+}
 
 /** Clears saved data from the browser */
 function clearData() {
@@ -29,6 +36,18 @@ function logout() {
 
 <template>
     <div class="settings-view flex flex-col p-5 gap-3">
+        <div class="app-setting-item flex flex-row justify-between items-center" role="button" id="clear-data-setting">
+            <div>
+                <h5 class="app-setting-item__title">Show all subscriptions</h5>
+                <span class="app-setting-item__desc">
+                    Show all subscriptions, including disabled ones and other events
+                </span>
+            </div>
+            <Switch
+                id="settings-show-all-subs"
+                :value="appState.viewAllSubscriptions"
+                @value="setViewAllSubscriptions" />
+        </div>
         <div class="app-setting-item" role="button" id="clear-data-setting" @click="clearData">
             <h5 class="app-setting-item__title">Clear cache</h5>
             <span class="app-setting-item__desc">Clear saved data from the browser</span>
