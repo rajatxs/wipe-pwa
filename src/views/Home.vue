@@ -1,5 +1,5 @@
 <script setup>
-import { toRaw, watch } from 'vue';
+import { toRaw, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import { fetchSubscriptions, changeSubscriptionStatus } from '../api/subs';
@@ -39,6 +39,22 @@ const toggleStatusMutation = useMutation({
     },
 });
 
+const presenceSubs = computed(function () {
+    if (Array.isArray(subs.value)) {
+        return subs.value.filter((sub) => sub.event === 'presence.update');
+    } else {
+        return [];
+    }
+});
+
+const contactSubs = computed(function () {
+    if (Array.isArray(subs.value)) {
+        return subs.value.filter((sub) => sub.event === 'contacts.update');
+    } else {
+        return [];
+    }
+});
+
 /**
  * Handles the view presence action
  * @param {Subscription} sub
@@ -58,8 +74,13 @@ watch(isFetchedAfterMount, () => {
 <template>
     <LoaderView v-if="isLoading" message="Loading" />
     <div v-else-if="subs" class="flex flex-col py-5 w-full gap-2">
-        <div v-for="sub in subs" :key="sub.id" class="subs-item">
-            <div role="button" class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800" @click="handleViewPresence(sub)">
+
+        <!-- Presence subscription -->
+        <div v-for="sub in presenceSubs" :key="sub.id" class="subs-item">
+            <div
+                role="button"
+                class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                @click="handleViewPresence(sub)">
                 <div class="relative w-12 h-12">
                     <img
                         :src="avatarUrl(sub.alias)"
@@ -73,6 +94,37 @@ watch(isFetchedAfterMount, () => {
                 <div class="flex flex-col gap-1">
                     <div class="font-medium leading-5">{{ sub.alias }}</div>
                     <SubscriptionStatus :show="sub.enabled" :sub-id="sub.id" :fallback="sub.phone" />
+                </div>
+            </div>
+            <div class="w-[20%] flex items-center justify-end pr-5 h-12">
+                <Switch
+                    :id="`sub-switch-${sub.id}`"
+                    :value="sub.enabled"
+                    @value="toggleStatusMutation.mutate({ id: sub.id, enabled: $event })" />
+            </div>
+        </div>
+
+        <hr class="w-[92%] mx-auto my-2 border-neutral-200 dark:border-neutral-700" />
+
+        <!-- Contact subscription -->
+        <div v-for="sub in contactSubs" :key="sub.id" class="subs-item">
+            <div
+                role="button"
+                class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                @click="handleViewPresence(sub)">
+                <div class="relative w-12 h-12">
+                    <img
+                        :src="avatarUrl(sub.alias)"
+                        :alt="sub.alias"
+                        :title="sub.alias"
+                        width="46"
+                        height="46"
+                        class="rounded-full" />
+                    <NotificationIcon v-if="sub.notify" class="subs-alert-badge" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="font-medium leading-5">{{ sub.alias }}</div>
+                    <div class="text-xs text-neutral-500">Contact</div>
                 </div>
             </div>
             <div class="w-[20%] flex items-center justify-end pr-5 h-12">
