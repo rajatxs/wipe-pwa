@@ -41,8 +41,7 @@ function handleChanges($event) {
     -webkit-tap-highlight-color: transparent;
 }
 .app-switch input[type='checkbox']:checked + label {
-    /* background: var(--color); */
-    @apply bg-emerald-500;
+    @apply bg-emerald-500 dark:bg-emerald-600;
 }
 .app-switch input[type='checkbox']:checked + label::after {
     left: calc(100% - 4px);
@@ -55,7 +54,7 @@ function handleChanges($event) {
     display: block;
     border-radius: 24px;
     position: relative;
-    @apply bg-neutral-200;
+    @apply bg-neutral-200 dark:bg-neutral-700;
 }
 .app-switch label::after {
     content: '';
