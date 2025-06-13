@@ -65,7 +65,7 @@ function handleChanges($event) {
     width: 16px;
     height: 16px;
     border-radius: 16px;
-    transition: 0.3s;
+    transition: 250ms ease-out;
     @apply bg-white;
 }
 </style>
