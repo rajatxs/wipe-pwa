@@ -69,9 +69,9 @@ function logout() {
         <div class="app-setting-item flex flex-row justify-between items-center" role="button" id="clear-data-setting">
             <div>
                 <h5 class="app-setting-item__title">Show all subscriptions</h5>
-                <span class="app-setting-item__desc">
+                <p class="app-setting-item__desc">
                     Show all subscriptions, including disabled ones and other events
-                </span>
+                </p>
             </div>
             <Switch
                 id="settings-show-all-subs"
@@ -88,25 +88,25 @@ function logout() {
             <h5 class="app-setting-item__title">
                 {{ downloadingBackup ? 'Downloading backup...' : 'Download backup' }}
             </h5>
-            <span class="app-setting-item__desc">Download a database backup of all application data</span>
+            <p class="app-setting-item__desc">Download a database backup of all application data</p>
         </button>
 
         <!-- Clear cache -->
         <button class="app-setting-item" id="clear-data-setting" @click="clearData">
             <h5 class="app-setting-item__title">Clear cache</h5>
-            <span class="app-setting-item__desc">Clear saved data from the browser</span>
+            <p class="app-setting-item__desc">Clear saved data from the browser</p>
         </button>
 
         <!-- About -->
         <button class="app-setting-item" id="about-setting" @click="viewAboutDialog = true">
             <h5 class="app-setting-item__title">About</h5>
-            <span class="app-setting-item__desc">App version and other information</span>
+            <p class="app-setting-item__desc">App version and other information</p>
         </button>
 
         <!-- Logout -->
         <button class="app-setting-item" role="button" id="logout-setting" @click="logout">
             <h5 class="app-setting-item__title">Logout</h5>
-            <span class="app-setting-item__desc">Logout from the current session</span>
+            <p class="app-setting-item__desc">Logout from the current session</p>
         </button>
     </div>
 
@@ -123,6 +123,6 @@ function logout() {
 }
 
 .app-setting-item__desc {
-    @apply text-sm text-neutral-500 dark:text-neutral-400;
+    @apply text-sm text-left text-neutral-500 dark:text-neutral-400;
 }
 </style>
