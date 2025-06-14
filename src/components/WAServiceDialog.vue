@@ -44,10 +44,10 @@ function stop() {
 
 <style>
 .server-status__online {
-    @apply w-24 h-24 fill-emerald-500 transition;
+    @apply w-24 h-24 transition fill-emerald-500 dark:fill-emerald-600;
 }
 
 .server-status__offline {
-    @apply w-24 h-24 fill-neutral-600 transition;
+    @apply w-24 h-24 transition fill-neutral-600 dark:fill-neutral-400;
 }
 </style>
