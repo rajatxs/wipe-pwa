@@ -1,44 +1,44 @@
 {
-   "name": "@rxpm/wipe-web",
-   "description": "Implemented the client app for the Wipe platform",
-   "version": "2.1.5",
-   "type": "module",
-   "author": {
-      "name": "Rajat Sharma",
-      "email": "rajatxt@proton.me",
-      "url": "https://github.com/rajatxs"
-   },
-   "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview --port 4173"
-   },
-   "keywords": [
-      "wipe",
-      "wipe-web"
-   ],
-   "license": "ISC",
-   "markdown": "github",
-   "repository": "https://github.com/rajatxs/wipe-web.git",
-   "readme": "https://github.com/rajatxs/wipe-web?tab=readme-ov-file#readme",
-   "bugs": {
-      "email": "rajatxt@proton.me",
-      "url": "https://github.com/rajatxs/wipe-web/issues"
-   },
-   "dependencies": {
-      "@tanstack/vue-query": "^5.74.4",
-      "axios": "^1.8.4",
-      "moment": "^2.29.4",
-      "vue": "^3.2.37",
-      "vue-router": "^4.1.3"
-   },
-   "devDependencies": {
-      "@vitejs/plugin-vue": "^5.2.3",
-      "autoprefixer": "^10.4.21",
-      "postcss": "^8.5.3",
-      "tailwindcss": "^3.4.17",
-      "vite": "^6.3.1",
-      "vite-plugin-pwa": "^1.0.0",
-      "workbox-precaching": "^6.5.4"
-   }
+    "name": "@rxpm/wipe-web",
+    "description": "Implementation of the client app for the Wipe platform",
+    "version": "2.1.6",
+    "type": "module",
+    "author": {
+        "name": "Rajat Sharma",
+        "email": "rajatxt@proton.me",
+        "url": "https://github.com/rajatxs"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview --port 4173"
+    },
+    "keywords": [
+        "wipe",
+        "wipe-web"
+    ],
+    "license": "ISC",
+    "markdown": "github",
+    "repository": "https://github.com/rajatxs/wipe-web.git",
+    "readme": "https://github.com/rajatxs/wipe-web?tab=readme-ov-file#readme",
+    "bugs": {
+        "email": "rajatxt@proton.me",
+        "url": "https://github.com/rajatxs/wipe-web/issues"
+    },
+    "dependencies": {
+        "@tanstack/vue-query": "^5.74.4",
+        "axios": "^1.8.4",
+        "moment": "^2.29.4",
+        "vue": "^3.2.37",
+        "vue-router": "^4.1.3"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.2.3",
+        "autoprefixer": "^10.4.21",
+        "postcss": "^8.5.3",
+        "tailwindcss": "^3.4.17",
+        "vite": "^6.3.1",
+        "vite-plugin-pwa": "^1.0.0",
+        "workbox-precaching": "^6.5.4"
+    }
 }
