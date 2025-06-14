@@ -87,7 +87,7 @@ watch(isFetchedAfterMount, () => {
         <div v-for="sub in presenceSubs" :key="sub.id" class="subs-item">
             <div
                 role="button"
-                class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                class="subs-router-link"
                 @click="handleViewPresence(sub)">
                 <div class="relative w-12 h-12">
                     <img
@@ -119,7 +119,7 @@ watch(isFetchedAfterMount, () => {
             <div v-for="sub in contactSubs" :key="sub.id" class="subs-item">
                 <div
                     role="button"
-                    class="subs-router-link hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    class="subs-router-link"
                     @click="handleViewPresence(sub)">
                     <div class="relative w-12 h-12">
                         <img
@@ -159,7 +159,7 @@ watch(isFetchedAfterMount, () => {
 }
 
 .subs-router-link {
-    @apply flex items-center h-full gap-2 w-[80%] px-5 rounded-md transition-colors;
+    @apply flex items-center h-full gap-2 w-[80%] px-5 rounded-md transition-colors active:bg-neutral-100 md:hover:bg-neutral-100 dark:active:bg-neutral-800 md:dark:hover:bg-neutral-800;
 }
 
 .subs-alert-badge {

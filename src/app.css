@@ -15,7 +15,7 @@
 }
 
 .app-button {
-    @apply w-full p-2 bg-emerald-500 text-white text-sm rounded-md transition-colors outline-none hover:bg-emerald-600;
+    @apply w-full p-2 bg-emerald-500 text-white text-sm rounded-md transition-colors outline-none active:bg-emerald-600 dark:bg-emerald-600 dark:active:bg-emerald-700;
 }
 
 .app-container {

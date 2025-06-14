@@ -66,11 +66,7 @@ function logout() {
 
 <style>
 .app-setting-item {
-    @apply flex flex-col justify-center p-3 cursor-pointer border rounded-lg border-neutral-200 dark:border-neutral-700;
-}
-
-.app-setting-item:hover {
-    @apply bg-neutral-100 dark:bg-neutral-800;
+    @apply flex flex-col justify-center p-3 cursor-pointer border rounded-lg border-neutral-200 active:bg-neutral-100 md:hover:bg-neutral-100 dark:border-neutral-700 dark:active:bg-neutral-800 md:dark:hover:bg-neutral-800;
 }
 
 .app-setting-item__title {
