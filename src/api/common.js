@@ -45,3 +45,17 @@ export async function stopWAServer() {
     const response = await axios.put('/wa-socket/close');
     return response.status === 200;
 }
+
+/**
+ * Fetches database backup file
+ * @returns {Promise<Blob>}
+ */
+export async function fetchDatabaseBackupFile() {
+    const response = await axios.request({
+        method: 'GET',
+        url: '/store/file',
+        responseType: 'blob',
+    });
+
+    return response.data;
+}
