@@ -23,7 +23,7 @@ import { RouterLink } from 'vue-router';
 }
 
 .app-navigation-tab-item.active {
-   @apply bg-emerald-500 text-white;
+   @apply bg-emerald-500 text-white dark:bg-emerald-600;
 }
 
 .app-navigation-tab-item:not(.active):active {
